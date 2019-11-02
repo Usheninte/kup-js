@@ -21,6 +21,7 @@ This allows variables to be defined that can operate either in a local or the gl
 */
 
 // var
+// Line 18 will display the data referred to by the globalAge variable. This will run because the globalAge lies within the global scope in this file. Calling the displayLocalAge function is a way to access the data stored in the localAge variable. The variable lies within this local scope of this function. Trying to access localAge through the console will return an error as localAge is not defined in the global scope
 var globalAge = 27;
 function displayLocalAge() {
   var localAge = 34;
@@ -30,7 +31,7 @@ console.log(globalAge);
 displayLocalAge();
 
 // let
-let favouriteFilms;
+// A variable name is declared twice on lines 24 and 34. As this is done with the let keyword, this variable contains different data based on the scope within which it operates. When logged to the console, the data returned is that for the let variable that is not within the block scope. This is how the let keyword is typically expected to operate.
 function favFilms() {
   let favouriteFilms = {
     'My fav films are:': [
@@ -46,7 +47,9 @@ let favouriteFilms = 'A different list of favorite films...';
 console.log(favouriteFilms);
 
 // const
-const lion;
-console.log(lion);
-const pride = ["lion", "lioness", "cub"];
+// Variables created with the const keyword can not be initialised without a variable. Although const variables typically contain data that is permanent in nature, this does not mean that their values are immutable - as shown by adding cub to the pride array in line 55.
+// const lion;
+// console.log(lion);
+const pride = ['lion', 'lioness'];
+pride.push('cub');
 console.log(pride);
