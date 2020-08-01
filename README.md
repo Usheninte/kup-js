@@ -11,3 +11,7 @@ Keeping up with the JavaScripts
 
 - [file](./01-variables-and-constants/variables.js)
 - [video](https://youtu.be/-W1JAM_lP3w)
+
+> Homework Assignment #4: Functions
+
+- [file](./03-functions/main.js)
