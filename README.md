@@ -1,6 +1,6 @@
 # kup-js
 
-Keeping up with the JavaScripts
+Keeping up with the JavaScripts: ES6+
 
 > Homework Assignment #1: Data Types
 
