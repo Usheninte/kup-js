@@ -16,17 +16,21 @@ function timeAdder(value1, label1, value2, label2) {
     let labels = [label1, label2];
 
     // // acceptable strings
-    const labelWords = [
-        "seconds", "minutes", "hours", "days",
-        "second", "minute", "hour", "day"
-    ];
+    const labelWords = {
+        singular: ["second", "minute", "hour", "day"],
+        plural: ["seconds", "minutes", "hours", "days",]
+    };
+
+    const labelWordsBucket = Object.values(labelWords);
+    // console.log(lableWordsBucket);
 
     labels.forEach(label => {
         if (typeof label !== 'string') {
             throw "Error: Invalid input.";
         };
 
-        if (labelWords.includes(label) ===  false) {
+        if (labelWordsBucket[0].includes(label) === false
+            && labelWordsBucket[1].includes(label) === false) {
             throw "Error: Not a valid label."
         };
     });
