@@ -14,14 +14,21 @@ const assert = require('assert').strict;
 
 function timeAdder(value1, label1, value2, label2) {
     let labels = [label1, label2];
-    // checking if label type is string
-    let labelTypeValidity = [];
-    labels.forEach(label => labelTypeValidity.push(typeof label == 'string'));
-    console.log(labelTypeValidity);
-    labelTypeValidity.forEach(label => {
-        if(label === false) {
+
+    // // acceptable strings
+    const labelWords = [
+        "seconds", "minutes", "hours", "days",
+        "second", "minute", "hour", "day"
+    ];
+
+    labels.forEach(label => {
+        if (typeof label !== 'string') {
             throw "Error: Invalid input.";
-        }
+        };
+
+        if (labelWords.includes(label) ===  false) {
+            throw "Error: Not a valid label."
+        };
     });
 
     // ...
@@ -29,7 +36,7 @@ function timeAdder(value1, label1, value2, label2) {
 }
 
 try {
-    timeAdder(1, "minute", 2, "seconds")
+    timeAdder(1, "minute", 2, "love");
 } catch (e) {
-    console.error(e)
+    console.error(e);
 }
