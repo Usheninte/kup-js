@@ -29,43 +29,72 @@ function timeAdder(value1, label1, value2, label2) {
 
     // console.log(lableWordsBucket);
 
-    function timeCalc(val, lab) {
-        console.log(val, lab);
+    let clockBucket = []
 
+    function inputChecker(val, lab) {
+
+        // checking values for type number
         val.forEach(value => {
             if (typeof value !== 'number') {
-                throw "Error: Invalid input.";
+                throw "Error ...";
             }
         })
 
+        // checking labels for type string
         lab.forEach(label => {
             if (typeof label !== 'string') {
-                throw "Error: Invalid input.";
+                throw "Error ...";
             };
 
             if (labelWordsBucket[0].includes(label) === false
                 && labelWordsBucket[1].includes(label) === false) {
-                throw "Error: Not a valid label.";
+                throw "Error ...";
             };
         });
 
+        // checking valid value & label pairing (1)
         if (val[0] === 1 && singular.includes(lab[0])) {
-            console.log("Scaffolding: Valid value & label (1)");
+
+            const first_arg = [val[0], lab[0]];
+            clockBucket.push(first_arg);
+
+        } else if (val[0] > 1 && plural.includes(lab[0])) {
+
+            const first_arg = [val[0], lab[0]];
+            clockBucket.push(first_arg);
+
         } else {
-            throw "Error: Invalid input.";
+            throw "Error ...";
         }
 
-        if (val[1] > 1 && plural.includes(lab[1])) {
-            console.log("Scaffolding: Valid value & label (2)");
+        // checking valid value & label pairing (2)
+        if (val[1] === 1 && singular.includes(lab[1])) {
+
+            const second_arg = [val[1], lab[1]];
+            clockBucket.push(second_arg);
+
+        } else if (val[1] > 1 && plural.includes(lab[1])) {
+
+            const second_arg = [val[1], lab[1]];
+            clockBucket.push(second_arg);
+
         } else {
-            throw "Error: Invalid input.";
+            throw "Error ...";
         }
+
+        console.log(clockBucket);
+
     };
 
-    timeCalc(values, labels);
+    // function timeCalc(val, lab) {
+    // }
+
+    inputChecker(values, labels);
+    // timeCalc(values, labels);
 
     // ...
     console.log("! Final line.");
+
 };
 
 try {
