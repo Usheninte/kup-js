@@ -17,15 +17,13 @@
 
 ## TO DO
 
-- Collect values into an array
-- Check that labels have type number
-- Check that label is singular when accompanying value is one
-- Check that label is plural when accompanying value is greater than one
-
-## DOING
-
 ## DONE
 
 - Collect labels into an array
 - Check that labels have type string
 - Check that labels are valid, based of accepted group of words
+
+- Collect values into an array
+- Check that labels have type number
+- Check that label is singular when accompanying value is one
+- Check that label is plural when accompanying value is greater than one
