@@ -12,6 +12,10 @@ for (let i = 1; i <= 100; i++) {
     else if (i % 5 === 0) {
         console.log("Buzz")
     }
+    // conditional to print prime numbers as "Prime"
+    else if (isPrime0to100(i)) {
+        console.log("Prime")
+    }
     else {
         console.log(i);
     }
