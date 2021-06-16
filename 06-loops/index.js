@@ -16,3 +16,15 @@ for (let i = 1; i <= 100; i++) {
         console.log(i);
     }
 }
+
+function isPrime0to100(num) {
+    for (let i = 2; i <= 100; i++) {
+        if (num === 2) {
+            return true;
+        } else if (num % i === 0) {
+            return false;
+        } else {
+            return num > 1;
+        }
+    }
+}
