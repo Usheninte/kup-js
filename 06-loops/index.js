@@ -1,7 +1,11 @@
 // main for loop
 for (let i = 1; i <= 100; i++) {
+    // conditional to print multiples of 3 & 5 as "FizzBuzz"
+    if (i % (3 * 5) === 0) {
+        console.log("FizzBuzz")
+    }
     // conditional to print multiples of 3 as "Fizz"
-    if (i % 3 === 0) {
+    else if (i % 3 === 0) {
         console.log("Fizz");
     }
     // conditional to print multiples of 5 as "Buzz"
