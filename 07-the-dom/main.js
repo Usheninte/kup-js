@@ -9,7 +9,15 @@ for (let color of favColours) {
     const colorDivParagraph = document.createElement('p');
 
     colorDivParagraph.innerText = color;
-    colorDiv.setAttribute('id', color);
+    colorDiv.setAttribute('class', 'box');
+    colorDiv.setAttribute('id', `id-${color}`);
+
+    setTimeout(() => {
+        console.log(colorDiv.id);
+    }, 1000)
+
+    colorDiv.style.backgroundColor = color;
+    colorDiv.style.padding = "50px 50px 0 50px";
 
     rectangleWrapper.appendChild(colorRect);
     colorRect.appendChild(colorDiv);
