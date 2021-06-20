@@ -64,7 +64,25 @@ const verticalExtract = (content) => {
     return extractedArray;
 }
 
-const output = verticalExtract(boxes);
+const dExtractLoop = (contentData, startNum, endNum, increment) => {
+    let row = [];
+    for (let i = startNum; i < endNum; i += increment) {
+        row.push(contentData[i].innerText);
+    }
+    return row;
+}
+
+const diagonalExtract = (content) => {
+    let extractedArray = [];
+
+    let row1 = dExtractLoop(content, 0, 9, 4);
+    let row2 = dExtractLoop(content, 2, 8, 2);
+
+    extractedArray.push(row1, row2);
+    return extractedArray;
+}
+
+const output = diagonalExtract(boxes);
 console.log(output);
 
 // win analysis
