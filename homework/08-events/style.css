@@ -1,0 +1,15 @@
+#game-board {
+    margin: 100px;
+}
+
+.board-row {
+    display: flex;
+    /* flex-flow: row; - default IS "row no-wrap" */
+    justify-content: center;
+}
+
+.box {
+    border: 5px solid black;
+    padding: 50px;
+    margin: 0;
+}
