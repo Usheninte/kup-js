@@ -26,9 +26,6 @@ const winContext = {
 const gameBoard = document.getElementById("game-board");
 const boxes = gameBoard.getElementsByTagName("span");
 
-// console.log(winContext);
-// console.log(boxes[0].id);
-
 const hExtractLoop = (contentData, startNum, endNum) => {
     let row = [];
     for (let i = startNum; i < endNum; i++) {
@@ -40,17 +37,40 @@ const hExtractLoop = (contentData, startNum, endNum) => {
 const horizontalExtract = (content) => {
     let extractedArray = [];
 
-    let row1 = hExtractLoop(content, 0, 3);
-    let row2 = hExtractLoop(content, 3, 6);
-    let row3 = hExtractLoop(content, 6, 9);
+    let row1 = hExtractLoop(content, 0, 8);
+    let row2 = hExtractLoop(content, 2, 9);
+    let row3 = hExtractLoop(content, 3, 10);
 
     extractedArray.push(row1, row2, row3);
     return extractedArray;
 }
 
-const output = horizontalExtract(boxes);
+const vExtractLoop = (contentData, startNum, endNum) => {
+    let row = [];
+    for (let i = startNum; i < endNum; i += 3) {
+        row.push(contentData[i].innerText);
+    }
+    return row;
+}
+
+const verticalExtract = (content) => {
+    let extractedArray = [];
+
+    let row1 = vExtractLoop(content, 0, 7);
+    let row2 = vExtractLoop(content, 1, 8);
+    let row3 = vExtractLoop(content, 2, 9);
+
+    extractedArray.push(row1, row2, row3);
+    return extractedArray;
+}
+
+const output = verticalExtract(boxes);
 console.log(output);
 
+// win analysis
+
+/*
 const winAnalysis = (content, winRules) => {
 
 }
+*/
