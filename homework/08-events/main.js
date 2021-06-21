@@ -98,12 +98,15 @@ gameBoard.addEventListener("click", (e) => {
     } else {
         if (lastPlayer === undefined) {
             e.target.innerText = playerX;
+            e.target.style.color = 'red';
             playHistory.push(playerX);
         } else if (lastPlayer === playerX) {
             e.target.innerText = playerO;
+            e.target.color = 'black';
             playHistory.push(playerO);
         } else if (lastPlayer === playerO) {
             e.target.innerText = playerX;
+            e.target.style.color = 'red';
             playHistory.push(playerX);
         } else {
             null
