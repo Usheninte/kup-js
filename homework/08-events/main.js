@@ -88,25 +88,29 @@ let playHistory = [];
 const playerX = "X";
 const playerO = "O";
 
-// for (let box of boxes) {
 gameBoard.addEventListener("click", (e) => {
     let lastPlayer = playHistory[playHistory.length - 1];
     console.log("clicked");
-    if (lastPlayer === undefined) {
+    if (e.target.innerText === playerX) {
         e.target.innerText = playerX;
-        playHistory.push(playerX);
-    } else if (lastPlayer === playerX) {
+    } else if (e.target.innerText === playerO) {
         e.target.innerText = playerO;
-        playHistory.push(playerO);
-    } else if (lastPlayer === playerO) {
-        e.target.innerText = playerX;
-        playHistory.push(playerX);
     } else {
-        null
+        if (lastPlayer === undefined) {
+            e.target.innerText = playerX;
+            playHistory.push(playerX);
+        } else if (lastPlayer === playerX) {
+            e.target.innerText = playerO;
+            playHistory.push(playerO);
+        } else if (lastPlayer === playerO) {
+            e.target.innerText = playerX;
+            playHistory.push(playerX);
+        } else {
+            null
+        }
     }
     console.log(e.target.innerText);
 });
-// }
 
 console.log(playHistory);
 
