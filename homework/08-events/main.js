@@ -2,7 +2,6 @@
 
 const gameBoard = document.getElementById("game-board");
 const boxes = gameBoard.getElementsByClassName("box");
-const results = document.getElementById("results");
 
 // position analysis
 
@@ -137,9 +136,7 @@ const showResponse = (str) => {
 
 gameBoard.addEventListener("click", (e) => {
     let lastPlayer = playHistory[playHistory.length - 1];
-    if (e.target.innerText === "RESULTS") {
-        e.target.innerText = "RESULTS";
-    } else if (e.target.innerText === playerX) {
+    if (e.target.innerText === playerX) {
         e.target.innerText = playerX;
     } else if (e.target.innerText === playerO) {
         e.target.innerText = playerO;
