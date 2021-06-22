@@ -120,15 +120,34 @@ let playHistory = [];
 const playerX = "X";
 const playerO = "O";
 
-// results.addEventListener('click', () => {
-// });
+const newGame = (gridBoxes) => {
+    const allEmpty = gridBoxes.every((el) => el === '');
+
+    return allEmpty;
+}
+
+const finishedGame = (gridBoxes) => {
+    // checks that no boxes are empty
+    return gridBoxes.every((el) => el !== '');
+}
 
 const showResponse = (str) => {
+    // output if game has winner
     let response = str.split(' ');
-    // search for 'won!' string in response
     let show = response.some((char) => char === 'won!');
 
     if (show) {
+        alert(str);
+        setTimeout(() => location.reload(), 2000);
+    }
+
+    // output for stalemate game
+    let fullGame = [];
+    for (let box of boxes) {
+        fullGame.push(box.innerText);
+    }
+
+    if (finishedGame(fullGame)) {
         alert(str);
         setTimeout(() => location.reload(), 2000);
     }
