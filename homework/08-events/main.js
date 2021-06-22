@@ -120,15 +120,17 @@ gameBoard.addEventListener("click", (e) => {
 });
 
 const verdict = (positions) => {
+    let factsOfGame = [];
+
     for (let arr of positions) {
-        if (arr.every(play => play === arr[0])) {
-            return [true, arr[0]];
+        if (arr.every(play => play === arr[0] && play !== "")) {
+            factsOfGame.push([true, arr[0]]);
+        } else {
+            factsOfGame.push([false]);
         }
-        // else {
-        //     return false;
-        // }
-        // console.log(arr);
     }
+
+    return factsOfGame;
 }
 
 const winAnalysis = (content) => {
@@ -140,14 +142,31 @@ const winAnalysis = (content) => {
     const verticalVerdict = verdict(verticals);
     const diagonalVerdict = verdict(diagonals);
 
-    if (horizontalVerdict[0]) {
-        return `${horizontalVerdict[1]} has won!`;
-    } else if (verticalVerdict[0]) {
-        return `${verticalVerdict[1]} has won!`;
-    } else if (diagonalVerdict[0]) {
-        return `${diagonalVerdict[1]} has won!`;
-    } else {
-        return false;
+    const verdicts = [horizontalVerdict, verticalVerdict, diagonalVerdict];
+
+    const isAllFalseInner = (el) => el[0] === false;
+
+    // `true` is the result of the prior `false` check
+    const areAllVerdictsFalse = (el) => el === true;
+
+    let falseBucket = [];
+
+    for (let decision of verdicts) {
+        for (let el of decision) {
+            if (el[0]) {
+                return `${el[1]} has won!`;
+            } else {
+                continue;
+            }
+        }
+
+        if (decision.every(isAllFalseInner)) {
+            falseBucket.push(decision.every(isAllFalseInner))
+        }
+    }
+
+    if (falseBucket.every(areAllVerdictsFalse)) {
+        return 'Cats game!';
     }
 }
 
@@ -158,5 +177,6 @@ results.addEventListener('click', () => {
         playerPositions.push(box.innerText);
     }
 
+    // console.log(analysisFilter(playerPositions));
     console.log(winAnalysis(playerPositions));
 });
