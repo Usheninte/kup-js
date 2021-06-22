@@ -123,10 +123,11 @@ const verdict = (positions) => {
     for (let arr of positions) {
         if (arr.every(play => play === arr[0])) {
             return [true, arr[0]];
-        } else {
-            return false;
         }
-        console.log(arr);
+        // else {
+        //     return false;
+        // }
+        // console.log(arr);
     }
 }
 
