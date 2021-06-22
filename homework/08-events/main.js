@@ -62,38 +62,7 @@ const diagonalExtract = (content) => {
     return extractedArray;
 }
 
-// click awareness
-
-let playHistory = [];
-const playerX = "X";
-const playerO = "O";
-
-gameBoard.addEventListener("click", (e) => {
-    let lastPlayer = playHistory[playHistory.length - 1];
-    if (e.target.innerText === "RESULTS") {
-        e.target.innerText = "RESULTS";
-    } else if (e.target.innerText === playerX) {
-        e.target.innerText = playerX;
-    } else if (e.target.innerText === playerO) {
-        e.target.innerText = playerO;
-    } else {
-        if (lastPlayer === undefined) {
-            e.target.innerText = playerX;
-            e.target.style.color = 'red';
-            playHistory.push(playerX);
-        } else if (lastPlayer === playerX) {
-            e.target.innerText = playerO;
-            e.target.color = 'black';
-            playHistory.push(playerO);
-        } else if (lastPlayer === playerO) {
-            e.target.innerText = playerX;
-            e.target.style.color = 'red';
-            playHistory.push(playerX);
-        } else {
-            null
-        }
-    }
-});
+// win assessment
 
 const verdict = (positions) => {
     let factsOfGame = [];
@@ -146,7 +115,52 @@ const winAnalysis = (content) => {
     }
 }
 
-results.addEventListener('click', () => {
+// click awareness
+
+let playHistory = [];
+const playerX = "X";
+const playerO = "O";
+
+// results.addEventListener('click', () => {
+// });
+
+const showResponse = (str) => {
+    let response = str.split(' ');
+    // search for 'won!' string in response
+    let show = response.some((char) => char === 'won!');
+
+    if (show) {
+        alert(str);
+        setTimeout(() => location.reload(), 2000);
+    }
+}
+
+gameBoard.addEventListener("click", (e) => {
+    let lastPlayer = playHistory[playHistory.length - 1];
+    if (e.target.innerText === "RESULTS") {
+        e.target.innerText = "RESULTS";
+    } else if (e.target.innerText === playerX) {
+        e.target.innerText = playerX;
+    } else if (e.target.innerText === playerO) {
+        e.target.innerText = playerO;
+    } else {
+        if (lastPlayer === undefined) {
+            e.target.innerText = playerX;
+            e.target.style.color = 'red';
+            playHistory.push(playerX);
+        } else if (lastPlayer === playerX) {
+            e.target.innerText = playerO;
+            e.target.color = 'black';
+            playHistory.push(playerO);
+        } else if (lastPlayer === playerO) {
+            e.target.innerText = playerX;
+            e.target.style.color = 'red';
+            playHistory.push(playerX);
+        } else {
+            null
+        }
+    }
+
     let playerPositions = [];
 
     for (let box of boxes) {
@@ -154,5 +168,7 @@ results.addEventListener('click', () => {
     }
 
     // console.log(analysisFilter(playerPositions));
-    console.log(winAnalysis(playerPositions));
+    showResponse(
+        winAnalysis(playerPositions)
+    );
 });
