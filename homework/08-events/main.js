@@ -183,7 +183,6 @@ gameBoard.addEventListener("click", (e) => {
         playerPositions.push(box.innerText);
     }
 
-    // console.log(analysisFilter(playerPositions));
     showResponse(
         winAnalysis(playerPositions)
     );
