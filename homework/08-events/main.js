@@ -119,26 +119,43 @@ gameBoard.addEventListener("click", (e) => {
     }
 });
 
+const verdict = (positions) => {
+    for (let arr of positions) {
+        if (arr.every(play => play === arr[0])) {
+            return [true, arr[0]];
+        } else {
+            return false;
+        }
+        console.log(arr);
+    }
+}
+
+const winAnalysis = (content) => {
+    const horizontals = horizontalExtract(content);
+    const verticals = verticalExtract(content);
+    const diagonals = diagonalExtract(content);
+
+    const horizontalVerdict = verdict(horizontals);
+    const verticalVerdict = verdict(verticals);
+    const diagonalVerdict = verdict(diagonals);
+
+    if (horizontalVerdict[0]) {
+        return `${horizontalVerdict[1]} has won!`;
+    } else if (verticalVerdict[0]) {
+        return `${verticalVerdict[1]} has won!`;
+    } else if (diagonalVerdict[0]) {
+        return `${diagonalVerdict[1]} has won!`;
+    } else {
+        return false;
+    }
+}
+
 results.addEventListener('click', () => {
     let playerPositions = [];
-    let playerX_positions = [];
-    let playerO_positions = [];
 
     for (let box of boxes) {
         playerPositions.push(box.innerText);
-
-        // if (box.innerText === playerX) {
-        //     playerX_positions.push(box.id);
-        // } else if (box.innerText === playerO) {
-        //     playerO_positions.push(box.id);
-        // } else {
-        //     continue;
-        // }
     }
 
-    console.log(horizontalExtract(playerPositions));
-
-    // console.log(playerPositions);
-    // console.log("X: " + playerX_positions);
-    // console.log("O: " + playerO_positions);
+    console.log(winAnalysis(playerPositions));
 });
