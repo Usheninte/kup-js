@@ -23,13 +23,17 @@ const winContext = {
 }
 
 // DOM extraction
+
 const gameBoard = document.getElementById("game-board");
-const boxes = gameBoard.getElementsByTagName("span");
+const boxes = gameBoard.getElementsByClassName("box");
+const results = document.getElementById("results");
+
+// position analysis
 
 const hExtractLoop = (contentData, startNum, endNum) => {
     let row = [];
     for (let i = startNum; i < endNum; i++) {
-        row.push(contentData[i].innerText);
+        row.push(contentData[i]);
     }
     return row;
 }
@@ -37,9 +41,9 @@ const hExtractLoop = (contentData, startNum, endNum) => {
 const horizontalExtract = (content) => {
     let extractedArray = [];
 
-    let row1 = hExtractLoop(content, 0, 8);
-    let row2 = hExtractLoop(content, 2, 9);
-    let row3 = hExtractLoop(content, 3, 10);
+    let row1 = hExtractLoop(content, 0, 3);
+    let row2 = hExtractLoop(content, 3, 6);
+    let row3 = hExtractLoop(content, 6, 9);
 
     extractedArray.push(row1, row2, row3);
     return extractedArray;
@@ -48,7 +52,7 @@ const horizontalExtract = (content) => {
 const vExtractLoop = (contentData, startNum, endNum) => {
     let row = [];
     for (let i = startNum; i < endNum; i += 3) {
-        row.push(contentData[i].innerText);
+        row.push(contentData[i]);
     }
     return row;
 }
@@ -67,7 +71,7 @@ const verticalExtract = (content) => {
 const dExtractLoop = (contentData, startNum, endNum, increment) => {
     let row = [];
     for (let i = startNum; i < endNum; i += increment) {
-        row.push(contentData[i].innerText);
+        row.push(contentData[i]);
     }
     return row;
 }
@@ -90,8 +94,9 @@ const playerO = "O";
 
 gameBoard.addEventListener("click", (e) => {
     let lastPlayer = playHistory[playHistory.length - 1];
-    console.log("clicked");
-    if (e.target.innerText === playerX) {
+    if (e.target.innerText === "RESULTS") {
+        e.target.innerText = "RESULTS";
+    } else if (e.target.innerText === playerX) {
         e.target.innerText = playerX;
     } else if (e.target.innerText === playerO) {
         e.target.innerText = playerO;
@@ -112,15 +117,28 @@ gameBoard.addEventListener("click", (e) => {
             null
         }
     }
-    console.log(e.target.innerText);
 });
 
-console.log(playHistory);
+results.addEventListener('click', () => {
+    let playerPositions = [];
+    let playerX_positions = [];
+    let playerO_positions = [];
 
-// win analysis
+    for (let box of boxes) {
+        playerPositions.push(box.innerText);
 
-/*
-const winAnalysis = (content, winRules) => {
+        // if (box.innerText === playerX) {
+        //     playerX_positions.push(box.id);
+        // } else if (box.innerText === playerO) {
+        //     playerO_positions.push(box.id);
+        // } else {
+        //     continue;
+        // }
+    }
 
-}
-*/
+    console.log(horizontalExtract(playerPositions));
+
+    // console.log(playerPositions);
+    // console.log("X: " + playerX_positions);
+    // console.log("O: " + playerO_positions);
+});
