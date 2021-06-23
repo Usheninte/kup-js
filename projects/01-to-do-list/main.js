@@ -138,3 +138,47 @@ login.addEventListener('click', () => {
     baseView.classList.toggle('visually-hidden');
     loginForm.classList.toggle('visually-hidden');
 });
+
+// behaviour on sign up click
+loginSubmit.addEventListener('click', (e) => {
+    // input DOM extraction
+    const loginEmailAddress = document.getElementById('loginEmailAddress');
+    const loginPassword = document.getElementById('loginPassword');
+
+    // input errors DOM extraction
+    const loginEmailAddressError = document.getElementById('loginisterEmailAddressError');
+    const loginEmailAddressLengthError = document.getElementById('loginisterEmailAddressLengthError');
+    const loginEmailAddressContentError = document.getElementById('loginisterEmailAddressContentError');
+    const loginPasswordError = document.getElementById('loginPasswordError');
+    const loginPasswordLengthError = document.getElementById('loginPasswordLengthError');
+
+    // form field validations
+    emptyFieldCheck(loginEmailAddress, loginEmailAddressError, 'Email address');
+    valueLengthCheck(loginEmailAddress, loginEmailAddressLengthError, 6, 'Email address');
+    generalValidation(
+        validateEmail(loginEmailAddress.value), loginEmailAddressContentError,
+        'Email address should be in valid format');
+    emptyFieldCheck(loginPassword, loginPasswordError, 'Password');
+    valueLengthCheck(loginPassword, loginPasswordLengthError, 6, 'Password');
+
+    const inputValid = fullyValidForm(
+        emptyFieldCheck(loginEmailAddress, loginEmailAddressError, 'Email address'),
+        valueLengthCheck(loginEmailAddress, loginEmailAddressLengthError, 6, 'Email address'),
+        generalValidation(
+            validateEmail(loginEmailAddress.value), loginEmailAddressContentError,
+            'Email address should be in valid format',
+        ),
+        emptyFieldCheck(loginPassword, loginPasswordError, 'Password'),
+        valueLengthCheck(loginPassword, loginPasswordLengthError, 6, 'Password'),
+    );
+
+    if (inputValid) {
+        const user = {
+            'email': loginEmailAddress.value,
+            'password': loginPassword.value
+        };
+        console.log(user);
+    }
+
+    e.preventDefault();
+});

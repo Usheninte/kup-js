@@ -70,10 +70,33 @@
                         <input class="form-check-input" type="checkbox" id="registerTerms">
                         <p id="registerTermsError" class="error-note"></p>
                     </div>
-                    <button class="btn btn-dark my-3" id="signupSubmit">Submit</button>
+                    <button class="btn btn-dark my-3" id="signupSubmit">Sign Up</button>
                 </form>
             </div>
         </div>
+
+        <div id="loginForm" class="row visually-hidden">
+            <div class="col-10 col-md-4 py-2">
+                <h4 class="text-primary text-underline">Login</h4>
+                <form>
+                    <div class="my-3">
+                        <label for="loginEmailAddress" class="form-label">Email address</label>
+                        <span id="loginEmailAddressError" class="error-note"></span>
+                        <span id="loginEmailAddressLengthError" class="error-note"></span>
+                        <span id="loginEmailAddressContentError" class="error-note"></span>
+                        <input type="email" class="form-control" id="loginEmailAddress">
+                    </div>
+                    <div class="my-3">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <span id="loginPasswordError" class="error-note"></span>
+                        <span id="loginPasswordLengthError" class="error-note"></span>
+                        <input type="password" class="form-control" id="loginPassword">
+                    </div>
+                    <button class="btn btn-dark my-3" id="loginSubmit">Log In</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
     <!-- Custom behaviour -->
