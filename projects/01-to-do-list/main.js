@@ -13,6 +13,15 @@ signup.addEventListener('click', () => {
     signupForm.classList.toggle('visually-hidden');
 });
 
+// empty field check
+const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
+    if (!inputElement.value) {
+        inputElementError.innerText = `${errorTextName} can not be blank`;
+        inputElement.parentElement.appendChild(inputElementError);
+        setTimeout(() => inputElementError.innerText = '', 3000);
+    }
+};
+
 signupSubmit.addEventListener('click', (e) => {
     // input DOM extraction
     const regFirstName = document.getElementById('registerFirstName');
@@ -26,36 +35,25 @@ signupSubmit.addEventListener('click', (e) => {
     const regLastNameError = document.getElementById('registerLastNameError');
     const regEmailAddressError = document.getElementById('registerEmailAddressError');
     const regPasswordError = document.getElementById('registerPasswordError');
+    const regPasswordLengthError = document.getElementById('registerPasswordLengthError');
     const regTermsError = document.getElementById('registerTermsError');
 
-    if (!regFirstName.value) {
-        regFirstNameError.innerText = 'First name can not be blank';
-        regFirstName.parentElement.appendChild(regFirstNameError);
-        setTimeout(() => regFirstNameError.innerText = '', 3000);
-    }
-
-    if (!regLastName.value) {
-        regLastNameError.innerText = 'Last name can not be blank';
-        regLastName.parentElement.appendChild(regLastNameError);
-        setTimeout(() => regLastNameError.innerText = '', 3000);
-    }
-
-    if (!regEmailAddress.value) {
-        regEmailAddressError.innerText = 'Email address can not be blank';
-        regEmailAddress.parentElement.appendChild(regEmailAddressError);
-        setTimeout(() => regEmailAddressError.innerText = '', 3000);
-    }
-
-    if (!regPassword.value) {
-        regPasswordError.innerText = 'Password can not be blank';
-        regPassword.parentElement.appendChild(regPasswordError);
-        setTimeout(() => regPasswordError.innerText = '', 3000);
-    }
+    // form field validations
+    emptyFieldCheck(regFirstName, regFirstNameError, 'First name');
+    emptyFieldCheck(regLastName, regLastNameError, 'Last name');
+    emptyFieldCheck(regEmailAddress, regEmailAddressError, 'Email address');
+    emptyFieldCheck(regPassword, regPasswordError, 'Password');
 
     if (regTerms.checked !== true) {
         regTermsError.innerText = 'Terms should not be blank';
         regTerms.parentElement.appendChild(regTermsError);
         setTimeout(() => regTermsError.innerText = '', 3000);
+    }
+
+    if (regPassword.value.length < 6) {
+        regPasswordLengthError.innerText = 'Password should be at least 6 characters long'
+        regPassword.parentElement.appendChild(regPasswordLengthError);
+        setTimeout(() => regPasswordLengthError.innerText = '', 3000);
     }
 
     e.preventDefault();
