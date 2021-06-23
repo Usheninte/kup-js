@@ -22,6 +22,14 @@ const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
     }
 };
 
+const valueLengthCheck = (inputElement, inputElementError, minLength, errorTextName) => {
+    if (inputElement.value.length < minLength) {
+        inputElementError.innerText = `${errorTextName} should be at least ${minLength} characters long`;
+        inputElement.parentElement.appendChild(inputElementError);
+        setTimeout(() => inputElementError.innerText = '', 3000);
+    }
+};
+
 signupSubmit.addEventListener('click', (e) => {
     // input DOM extraction
     const regFirstName = document.getElementById('registerFirstName');
@@ -32,7 +40,9 @@ signupSubmit.addEventListener('click', (e) => {
 
     // input errors
     const regFirstNameError = document.getElementById('registerFirstNameError');
+    const registerFirstNameLengthError = document.getElementById('registerFirstNameLengthError');
     const regLastNameError = document.getElementById('registerLastNameError');
+    const registerLastNameLengthError = document.getElementById('registerLastNameLengthError');
     const regEmailAddressError = document.getElementById('registerEmailAddressError');
     const regPasswordError = document.getElementById('registerPasswordError');
     const regPasswordLengthError = document.getElementById('registerPasswordLengthError');
@@ -50,11 +60,9 @@ signupSubmit.addEventListener('click', (e) => {
         setTimeout(() => regTermsError.innerText = '', 3000);
     }
 
-    if (regPassword.value.length < 6) {
-        regPasswordLengthError.innerText = 'Password should be at least 6 characters long'
-        regPassword.parentElement.appendChild(regPasswordLengthError);
-        setTimeout(() => regPasswordLengthError.innerText = '', 3000);
-    }
+    valueLengthCheck(regFirstName, registerFirstNameLengthError, 3, 'First name');
+    valueLengthCheck(regLastName, registerLastNameLengthError, 3, 'Last name');
+    valueLengthCheck(regPassword, regPasswordLengthError, 6, 'Password');
 
     e.preventDefault();
     const user = {
