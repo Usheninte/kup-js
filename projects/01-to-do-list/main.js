@@ -18,6 +18,9 @@ const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
     if (!inputElement.value) {
         inputElementError.innerText = `${errorTextName} can not be blank`;
         setTimeout(() => inputElementError.innerText = '', 3000);
+        return false;
+    } else {
+        return true;
     }
 };
 
@@ -25,6 +28,9 @@ const valueLengthCheck = (inputElement, inputElementError, minLength, errorTextN
     if (inputElement.value.length < minLength) {
         inputElementError.innerText = `${errorTextName} should be at least ${minLength} characters long`;
         setTimeout(() => inputElementError.innerText = '', 3000);
+        return false;
+    } else {
+        return true;
     }
 };
 
@@ -37,7 +43,22 @@ const generalValidation = (inputValue, inputElementError, errorText) => {
     if (!inputValue) {
         inputElementError.innerText = errorText;
         setTimeout(() => inputElementError.innerText = '', 3000);
+        return false;
+    } else {
+        return true;
     }
+}
+
+const fullyValidForm = (...args) => {
+    let validityBucket = [];
+
+    for (let check of args) {
+        validityBucket.push(check);
+    }
+
+    // checks that all checks have run successfully
+    const finalCheck = validityBucket.every((status) => status === true);
+    return finalCheck;
 }
 
 signupSubmit.addEventListener('click', (e) => {
@@ -62,28 +83,44 @@ signupSubmit.addEventListener('click', (e) => {
 
     // form field validations
     emptyFieldCheck(regFirstName, regFirstNameError, 'First name');
-    emptyFieldCheck(regLastName, regLastNameError, 'Last name');
-    emptyFieldCheck(regEmailAddress, regEmailAddressError, 'Email address');
-    emptyFieldCheck(regPassword, regPasswordError, 'Password');
-
-    generalValidation(regTerms.checked, regTermsError, 'Terms should not be blank');
-
     valueLengthCheck(regFirstName, registerFirstNameLengthError, 3, 'First name');
+    emptyFieldCheck(regLastName, regLastNameError, 'Last name');
     valueLengthCheck(regLastName, registerLastNameLengthError, 3, 'Last name');
+    emptyFieldCheck(regEmailAddress, regEmailAddressError, 'Email address');
     valueLengthCheck(regEmailAddress, registerEmailAddressLengthError, 6, 'Email address');
-    valueLengthCheck(regPassword, regPasswordLengthError, 6, 'Password');
-
     generalValidation(
         validateEmail(regEmailAddress.value), registerEmailAddressContentError,
         'Email address should be in valid format');
+    emptyFieldCheck(regPassword, regPasswordError, 'Password');
+    valueLengthCheck(regPassword, regPasswordLengthError, 6, 'Password');
+    generalValidation(regTerms.checked, regTermsError, 'Terms should not be blank');
+
+    const inputValid = fullyValidForm(
+        emptyFieldCheck(regFirstName, regFirstNameError, 'First name'),
+        valueLengthCheck(regFirstName, registerFirstNameLengthError, 3, 'First name'),
+        emptyFieldCheck(regLastName, regLastNameError, 'Last name'),
+        valueLengthCheck(regLastName, registerLastNameLengthError, 3, 'Last name'),
+        emptyFieldCheck(regEmailAddress, regEmailAddressError, 'Email address'),
+        valueLengthCheck(regEmailAddress, registerEmailAddressLengthError, 6, 'Email address'),
+        generalValidation(
+            validateEmail(regEmailAddress.value), registerEmailAddressContentError,
+            'Email address should be in valid format',
+        ),
+        emptyFieldCheck(regPassword, regPasswordError, 'Password'),
+        valueLengthCheck(regPassword, regPasswordLengthError, 6, 'Password'),
+        generalValidation(regTerms.checked, regTermsError, 'Terms should not be blank')
+    );
+
+    if (inputValid) {
+        const user = {
+            'firstName': regFirstName.value,
+            'lastName': regLastName.value,
+            'email': regEmailAddress.value,
+            'password': regPassword.value,
+            'terms': regTerms.checked
+        };
+        console.log(user);
+    }
 
     e.preventDefault();
-    const user = {
-        'firstName': regFirstName.value,
-        'lastName': regLastName.value,
-        'email': regEmailAddress.value,
-        'password': regPassword.value,
-        'terms': regTerms.checked
-    };
-    console.log(user);
 });
