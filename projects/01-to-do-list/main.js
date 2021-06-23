@@ -146,9 +146,9 @@ loginSubmit.addEventListener('click', (e) => {
     const loginPassword = document.getElementById('loginPassword');
 
     // input errors DOM extraction
-    const loginEmailAddressError = document.getElementById('loginisterEmailAddressError');
-    const loginEmailAddressLengthError = document.getElementById('loginisterEmailAddressLengthError');
-    const loginEmailAddressContentError = document.getElementById('loginisterEmailAddressContentError');
+    const loginEmailAddressError = document.getElementById('loginEmailAddressError');
+    const loginEmailAddressLengthError = document.getElementById('loginEmailAddressLengthError');
+    const loginEmailAddressContentError = document.getElementById('loginEmailAddressContentError');
     const loginPasswordError = document.getElementById('loginPasswordError');
     const loginPasswordLengthError = document.getElementById('loginPasswordLengthError');
 
