@@ -19,43 +19,53 @@
 <body>
 
     <div class="container-fluid mx-2 my-2">
-        <div id="title-bar" class="row">
+        <div id="titleBar" class="row">
             <div class="col-12 col-md py-2">
                 <h1 class="text-primary">To-do List App</h1>
             </div>
         </div>
 
-        <div id="base-view" class="row">
+        <div id="baseView" class="row">
             <div class="col-12 col-md py-2">
-                <button class="btn btn-primary" id="sign-up">Sign Up</button>
+                <button class="btn btn-primary" id="signup">Sign Up</button>
             </div>
             <div class="col-12 col-md py-2">
-                <button class="btn btn-outline-primary" id="log-in">Log In</button>
+                <button class="btn btn-outline-primary" id="login">Log In</button>
             </div>
 
         </div>
 
-        <div id="signup-form" class="row visually-hidden">
+        <div id="signupForm" class="row visually-hidden">
             <div class="col-10 col-md-4 py-2">
                 <h4 class="text-primary text-underline">Sign Up</h4>
                 <form>
-                    <div>
+                    <div class="my-3">
                         <label for="registerFirstName" class="form-label">First name</label>
+                        <span id="registerFirstNameError" class="error-note"></span>
                         <input type="text" class="form-control" id="registerFirstName">
                     </div>
-                    <div>
+                    <div class="my-3">
                         <label for="registerLastName" class="form-label">Last name</label>
+                        <span id="registerLastNameError" class="error-note"></span>
                         <input type="text" class="form-control" id="registerLastName">
                     </div>
-                    <div>
+                    <div class="my-3">
                         <label for="registerEmailAddress" class="form-label">Email address</label>
+                        <span id="registerEmailAddressError" class="error-note"></span>
                         <input type="email" class="form-control" id="registerEmailAddress">
                     </div>
-                    <div>
+                    <div class="my-3">
                         <label for="registerPassword" class="form-label">Password</label>
+                        <span id="registerPasswordError" class="error-note"></span>
                         <input type="password" class="form-control" id="registerPassword">
                     </div>
-                    <button class="btn btn-dark my-2" id="submit">Submit</button>
+                    <div class="form-check my-3">
+                        <label for="registerTerms" class="form-check-label">
+                            I agree to the Terms of Use</label>
+                        <input class="form-check-input" type="checkbox" id="registerTerms">
+                        <p id="registerTermsError" class="error-note"></p>
+                    </div>
+                    <button class="btn btn-dark my-3" id="signupSubmit">Submit</button>
                 </form>
             </div>
         </div>

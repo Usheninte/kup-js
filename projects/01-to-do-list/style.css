@@ -2,3 +2,9 @@
     text-decoration: underline;
     text-decoration-color: #000;
 }
+
+.error-note {
+    color: red;
+    font-style: italic;
+    font-size: 10px;
+}
