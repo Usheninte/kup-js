@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List App</title>
+    <title>To-Do List</title>
     <!-- Custom styling -->
     <link rel="stylesheet" type="text/css" href="style.css">
     <!-- Bootstrap CSS only -->
@@ -19,21 +19,49 @@
 <body>
 
     <div class="container-fluid mx-5 my-5">
-        <div class="row">
+        <div id="title-bar" class="row">
+            <div class="col-12 col-md py-2">
+                <h1 class="text-primary">To-do List App</h1>
+            </div>
+        </div>
 
+        <div id="base-view" class="row">
             <div class="col-12 col-md py-2">
-                <h2 class="text-primary text-underline">To-do List App</h2>
+                <button class="btn btn-primary" id="sign-up">Sign Up</button>
             </div>
             <div class="col-12 col-md py-2">
-                <button class="btn btn-primary">Sign Up</button>
-            </div>
-            <div class="col-12 col-md py-2">
-                <button class="btn btn-outline-primary">Log In</button>
+                <button class="btn btn-outline-primary" id="log-in">Log In</button>
             </div>
 
         </div>
+
+        <div id="signup-form" class="row">
+            <div class="col-12 col-md-7 py-2">
+                <h4 class="text-primary text-underline">Sign Up</h4>
+                <form>
+                    <div>
+                        <label for="registerFirstName" class="form-label">First name</label>
+                        <input type="text" class="form-control" id="registerFirstName">
+                    </div>
+                    <div>
+                        <label for="registerLastName" class="form-label">Last name</label>
+                        <input type="text" class="form-control" id="registerLastName">
+                    </div>
+                    <div>
+                        <label for="registerEmailAddress" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="registerEmailAddress">
+                    </div>
+                    <div>
+                        <label for="registerPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="registerPassword">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
+    <!-- Custom behaviour -->
+    <script src="main.js"></script>
 </body>
 
 </html>
