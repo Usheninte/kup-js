@@ -1,15 +1,7 @@
 // views
 const baseView = document.getElementById('baseView');
-const signupForm = document.getElementById('signupForm');
-
-// sign up flow
 const signup = document.getElementById('signup');
-const signupSubmit = document.getElementById('signupSubmit');
-
-signup.addEventListener('click', () => {
-    baseView.classList.toggle('visually-hidden');
-    signupForm.classList.toggle('visually-hidden');
-});
+const login = document.getElementById('login');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -62,6 +54,15 @@ const fullyValidForm = (...args) => {
     const finalCheck = validityBucket.every((status) => status === true);
     return finalCheck;
 }
+
+// sign up flow
+const signupForm = document.getElementById('signupForm');
+const signupSubmit = document.getElementById('signupSubmit');
+
+signup.addEventListener('click', () => {
+    baseView.classList.toggle('visually-hidden');
+    signupForm.classList.toggle('visually-hidden');
+});
 
 // behaviour on sign up click
 signupSubmit.addEventListener('click', (e) => {
@@ -127,4 +128,13 @@ signupSubmit.addEventListener('click', (e) => {
     }
 
     e.preventDefault();
+});
+
+// log in flow
+const loginForm = document.getElementById('loginForm');
+const loginSubmit = document.getElementById('loginSubmit');
+
+login.addEventListener('click', () => {
+    baseView.classList.toggle('visually-hidden');
+    loginForm.classList.toggle('visually-hidden');
 });
