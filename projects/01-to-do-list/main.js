@@ -17,7 +17,6 @@ signup.addEventListener('click', () => {
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
     if (!inputElement.value) {
         inputElementError.innerText = `${errorTextName} can not be blank`;
-        inputElement.parentElement.appendChild(inputElementError);
         setTimeout(() => inputElementError.innerText = '', 3000);
     }
 };
@@ -25,10 +24,21 @@ const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
 const valueLengthCheck = (inputElement, inputElementError, minLength, errorTextName) => {
     if (inputElement.value.length < minLength) {
         inputElementError.innerText = `${errorTextName} should be at least ${minLength} characters long`;
-        inputElement.parentElement.appendChild(inputElementError);
         setTimeout(() => inputElementError.innerText = '', 3000);
     }
 };
+
+const validateEmail = (email) => {
+    re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+const generalValidation = (inputValue, inputElementError, errorText) => {
+    if (!inputValue) {
+        inputElementError.innerText = errorText;
+        setTimeout(() => inputElementError.innerText = '', 3000);
+    }
+}
 
 signupSubmit.addEventListener('click', (e) => {
     // input DOM extraction
@@ -44,6 +54,8 @@ signupSubmit.addEventListener('click', (e) => {
     const regLastNameError = document.getElementById('registerLastNameError');
     const registerLastNameLengthError = document.getElementById('registerLastNameLengthError');
     const regEmailAddressError = document.getElementById('registerEmailAddressError');
+    const registerEmailAddressLengthError = document.getElementById('registerEmailAddressLengthError');
+    const registerEmailAddressContentError = document.getElementById('registerEmailAddressContentError');
     const regPasswordError = document.getElementById('registerPasswordError');
     const regPasswordLengthError = document.getElementById('registerPasswordLengthError');
     const regTermsError = document.getElementById('registerTermsError');
@@ -54,15 +66,16 @@ signupSubmit.addEventListener('click', (e) => {
     emptyFieldCheck(regEmailAddress, regEmailAddressError, 'Email address');
     emptyFieldCheck(regPassword, regPasswordError, 'Password');
 
-    if (regTerms.checked !== true) {
-        regTermsError.innerText = 'Terms should not be blank';
-        regTerms.parentElement.appendChild(regTermsError);
-        setTimeout(() => regTermsError.innerText = '', 3000);
-    }
+    generalValidation(regTerms.checked, regTermsError, 'Terms should not be blank');
 
     valueLengthCheck(regFirstName, registerFirstNameLengthError, 3, 'First name');
     valueLengthCheck(regLastName, registerLastNameLengthError, 3, 'Last name');
+    valueLengthCheck(regEmailAddress, registerEmailAddressLengthError, 6, 'Email address');
     valueLengthCheck(regPassword, regPasswordLengthError, 6, 'Password');
+
+    generalValidation(
+        validateEmail(regEmailAddress.value), registerEmailAddressContentError,
+        'Email address should be in valid format');
 
     e.preventDefault();
     const user = {
