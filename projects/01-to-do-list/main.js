@@ -1,7 +1,11 @@
+// local storage as database
+const database = window.localStorage;
+
 // views
 const baseView = document.getElementById('baseView');
 const signup = document.getElementById('signup');
 const login = document.getElementById('login');
+const dashboard = document.getElementById('dashboard');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -58,6 +62,16 @@ const fullyValidForm = (...args) => {
 // sign up flow
 const signupForm = document.getElementById('signupForm');
 const signupSubmit = document.getElementById('signupSubmit');
+
+// register user in local storage
+
+const registerUser = (userInformation) => {
+    database.setItem('firstName', userInformation['firstName']);
+    database.setItem('lastName', userInformation['lastName']);
+    database.setItem('email', userInformation['email']);
+    database.setItem('password', userInformation['password']);
+    database.setItem('acceptedTerms', userInformation['terms']);
+}
 
 signup.addEventListener('click', () => {
     baseView.classList.toggle('visually-hidden');
@@ -116,17 +130,24 @@ signupSubmit.addEventListener('click', (e) => {
     );
 
     if (inputValid) {
-        const user = {
+        const userInfo = {
             'firstName': regFirstName.value,
             'lastName': regLastName.value,
             'email': regEmailAddress.value,
             'password': regPassword.value,
-            'terms': regTerms.checked,
-            'lists': []
+            'terms': regTerms.checked
         };
-        console.log(user);
+
+        // register user
+        registerUser(userInfo);
+
+        // switch to dashboard
+        switchToDashboard(regEmailAddress.value, regPassword.value, signupForm);
+
+        console.log(userInfo);
     }
 
+    // block page refresh
     e.preventDefault();
 });
 
@@ -182,3 +203,13 @@ loginSubmit.addEventListener('click', (e) => {
 
     e.preventDefault();
 });
+
+const switchToDashboard = (email, pwd, currentView) => {
+    const user = database.getItem(email);
+    const userPassword = user['password'];
+
+    if (pwd === userPassword) {
+        currentView.classList.toggle('visually-hidden');
+        dashboard.classList.toggle('visually-hidden');
+    }
+}
