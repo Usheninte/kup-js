@@ -2,12 +2,10 @@
 const baseView = document.getElementById('baseView');
 const signupForm = document.getElementById('signupForm');
 
-// sign up DOM extraction
+// sign up flow
 const signup = document.getElementById('signup');
 const signupSubmit = document.getElementById('signupSubmit');
-// const login = document.getElementById('login');
 
-// sign up
 signup.addEventListener('click', () => {
     baseView.classList.toggle('visually-hidden');
     signupForm.classList.toggle('visually-hidden');
@@ -24,6 +22,7 @@ const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
     }
 };
 
+// field value length check
 const valueLengthCheck = (inputElement, inputElementError, minLength, errorTextName) => {
     if (inputElement.value.length < minLength) {
         inputElementError.innerText = `${errorTextName} should be at least ${minLength} characters long`;
@@ -34,11 +33,13 @@ const valueLengthCheck = (inputElement, inputElementError, minLength, errorTextN
     }
 };
 
+// email validity check
 const validateEmail = (email) => {
     re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
+// general validation
 const generalValidation = (inputValue, inputElementError, errorText) => {
     if (!inputValue) {
         inputElementError.innerText = errorText;
@@ -49,6 +50,7 @@ const generalValidation = (inputValue, inputElementError, errorText) => {
     }
 }
 
+// full check of form values
 const fullyValidForm = (...args) => {
     let validityBucket = [];
 
@@ -61,6 +63,7 @@ const fullyValidForm = (...args) => {
     return finalCheck;
 }
 
+// behaviour on sign up click
 signupSubmit.addEventListener('click', (e) => {
     // input DOM extraction
     const regFirstName = document.getElementById('registerFirstName');
@@ -69,7 +72,7 @@ signupSubmit.addEventListener('click', (e) => {
     const regPassword = document.getElementById('registerPassword');
     const regTerms = document.getElementById('registerTerms');
 
-    // input errors
+    // input errors DOM extraction
     const regFirstNameError = document.getElementById('registerFirstNameError');
     const registerFirstNameLengthError = document.getElementById('registerFirstNameLengthError');
     const regLastNameError = document.getElementById('registerLastNameError');
@@ -117,7 +120,8 @@ signupSubmit.addEventListener('click', (e) => {
             'lastName': regLastName.value,
             'email': regEmailAddress.value,
             'password': regPassword.value,
-            'terms': regTerms.checked
+            'terms': regTerms.checked,
+            'lists': []
         };
         console.log(user);
     }
