@@ -68,6 +68,20 @@ const switchToDashboard = (email, currentView) => {
     dashboard.classList.toggle('visually-hidden');
 }
 
+// login validation
+const loginValidation = (userObject, password, inputElementError, errorText) => {
+    const userValues = JSON.parse(database.getItem(userObject['email']));
+    const userPassword = userValues['password'];
+
+    if (password !== userPassword) {
+        inputElementError.innerText = errorText;
+        setTimeout(() => inputElementError.innerText = '', 3000);
+        return false;
+    } else {
+        return true;
+    }
+}
+
 // sign up flow
 const signupForm = document.getElementById('signupForm');
 const signupSubmit = document.getElementById('signupSubmit');
@@ -172,20 +186,6 @@ login.addEventListener('click', () => {
     baseView.classList.toggle('visually-hidden');
     loginForm.classList.toggle('visually-hidden');
 });
-
-// general validation
-const loginValidation = (userObject, password, inputElementError, errorText) => {
-    const userValues = JSON.parse(database.getItem(userObject['email']));
-    const userPassword = userValues['password'];
-
-    if (password !== userPassword) {
-        inputElementError.innerText = errorText;
-        setTimeout(() => inputElementError.innerText = '', 3000);
-        return false;
-    } else {
-        return true;
-    }
-}
 
 // behaviour on sign up click
 loginSubmit.addEventListener('click', (e) => {
