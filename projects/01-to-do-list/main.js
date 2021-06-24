@@ -66,11 +66,7 @@ const signupSubmit = document.getElementById('signupSubmit');
 // register user in local storage
 
 const registerUser = (userInformation) => {
-    database.setItem('firstName', userInformation['firstName']);
-    database.setItem('lastName', userInformation['lastName']);
-    database.setItem('email', userInformation['email']);
-    database.setItem('password', userInformation['password']);
-    database.setItem('acceptedTerms', userInformation['terms']);
+    database.setItem(`${userInformation['email']}`, JSON.stringify(userInformation));
 }
 
 signup.addEventListener('click', () => {
@@ -135,7 +131,8 @@ signupSubmit.addEventListener('click', (e) => {
             'lastName': regLastName.value,
             'email': regEmailAddress.value,
             'password': regPassword.value,
-            'terms': regTerms.checked
+            'terms': regTerms.checked,
+            'lists': []
         };
 
         // register user
