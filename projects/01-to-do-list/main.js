@@ -68,6 +68,19 @@ const switchToDashboard = (email, currentView) => {
     dashboard.classList.toggle('visually-hidden');
 }
 
+// user existence check
+const userExists = (userObject, inputElementError, errorText) => {
+    const user = database.getItem(userObject['email']);
+
+    if (!user) {
+        inputElementError.innerText = errorText;
+        setTimeout(() => inputElementError.innerText = '', 3000);
+        return false;
+    } else {
+        return true;
+    }
+}
+
 // login validation
 const loginValidation = (userObject, password, inputElementError, errorText) => {
     const userValues = JSON.parse(database.getItem(userObject['email']));
@@ -181,6 +194,7 @@ signupSubmit.addEventListener('click', (e) => {
 const loginForm = document.getElementById('loginForm');
 const loginSubmit = document.getElementById('loginSubmit');
 const loginAuthenticationError = document.getElementById('loginAuthenticationError');
+const userExistenceError = document.getElementById('userExistenceError');
 
 login.addEventListener('click', () => {
     baseView.classList.toggle('visually-hidden');
@@ -227,13 +241,17 @@ loginSubmit.addEventListener('click', (e) => {
         };
         console.log(userInfo);
 
-        if (loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
-            'User with password entered does not exist')) {
-            // switch to dashboard
-            switchToDashboard(userInfo['email'], loginForm);
+        if (userExists(userInfo, userExistenceError, 'User with email entered does not exist')) {
+            if (loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
+                'User with password entered does not exist')) {
+                // switch to dashboard
+                switchToDashboard(userInfo['email'], loginForm);
+            } else {
+                loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
+                    'User with password entered does not exist');
+            }
         } else {
-            loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
-                'User with password entered does not exist');
+            userExists(userInfo, userExistenceError, 'User with email entered does not exist');
         }
     }
 
