@@ -59,6 +59,15 @@ const fullyValidForm = (...args) => {
     return finalCheck;
 }
 
+// switch to dashboard 
+const switchToDashboard = (email, currentView) => {
+    const user = database.getItem(email);
+    console.log(user);
+
+    currentView.classList.toggle('visually-hidden');
+    dashboard.classList.toggle('visually-hidden');
+}
+
 // sign up flow
 const signupForm = document.getElementById('signupForm');
 const signupSubmit = document.getElementById('signupSubmit');
@@ -139,7 +148,13 @@ signupSubmit.addEventListener('click', (e) => {
         registerUser(userInfo);
 
         // switch to dashboard
-        switchToDashboard(userInfo['email'], signupForm);
+        if (loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
+            'User with password entered does not exist')) {
+            switchToDashboard(userInfo['email'], signupForm);
+        } else {
+            loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
+                'User with password entered does not exist');
+        }
 
         console.log(userInfo);
     }
@@ -214,6 +229,7 @@ loginSubmit.addEventListener('click', (e) => {
 
         if (loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
             'User with password entered does not exist')) {
+            // switch to dashboard
             switchToDashboard(userInfo['email'], loginForm);
         } else {
             loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
@@ -223,11 +239,3 @@ loginSubmit.addEventListener('click', (e) => {
 
     e.preventDefault();
 });
-
-const switchToDashboard = (email, currentView) => {
-    const user = database.getItem(email);
-    console.log(user);
-
-    currentView.classList.toggle('visually-hidden');
-    dashboard.classList.toggle('visually-hidden');
-}
