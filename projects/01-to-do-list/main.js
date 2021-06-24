@@ -139,7 +139,7 @@ signupSubmit.addEventListener('click', (e) => {
         registerUser(userInfo);
 
         // switch to dashboard
-        switchToDashboard(regEmailAddress.value, regPassword.value, signupForm);
+        switchToDashboard(userInfo['email'], signupForm);
 
         console.log(userInfo);
     }
@@ -151,11 +151,26 @@ signupSubmit.addEventListener('click', (e) => {
 // log in flow
 const loginForm = document.getElementById('loginForm');
 const loginSubmit = document.getElementById('loginSubmit');
+const loginAuthenticationError = document.getElementById('loginAuthenticationError');
 
 login.addEventListener('click', () => {
     baseView.classList.toggle('visually-hidden');
     loginForm.classList.toggle('visually-hidden');
 });
+
+// general validation
+const loginValidation = (userObject, password, inputElementError, errorText) => {
+    const userValues = JSON.parse(database.getItem(userObject['email']));
+    const userPassword = userValues['password'];
+
+    if (password !== userPassword) {
+        inputElementError.innerText = errorText;
+        setTimeout(() => inputElementError.innerText = '', 3000);
+        return false;
+    } else {
+        return true;
+    }
+}
 
 // behaviour on sign up click
 loginSubmit.addEventListener('click', (e) => {
@@ -191,22 +206,28 @@ loginSubmit.addEventListener('click', (e) => {
     );
 
     if (inputValid) {
-        const user = {
+        const userInfo = {
             'email': loginEmailAddress.value,
             'password': loginPassword.value
         };
-        console.log(user);
+        console.log(userInfo);
+
+        if (loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
+            'User with password entered does not exist')) {
+            switchToDashboard(userInfo['email'], loginForm);
+        } else {
+            loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
+                'User with password entered does not exist');
+        }
     }
 
     e.preventDefault();
 });
 
-const switchToDashboard = (email, pwd, currentView) => {
+const switchToDashboard = (email, currentView) => {
     const user = database.getItem(email);
-    const userPassword = user['password'];
+    console.log(user);
 
-    if (pwd === userPassword) {
-        currentView.classList.toggle('visually-hidden');
-        dashboard.classList.toggle('visually-hidden');
-    }
+    currentView.classList.toggle('visually-hidden');
+    dashboard.classList.toggle('visually-hidden');
 }
