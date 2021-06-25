@@ -6,6 +6,8 @@ const baseView = document.getElementById('baseView');
 const signup = document.getElementById('signup');
 const login = document.getElementById('login');
 const dashboard = document.getElementById('dashboard');
+const content = document.getElementById('content');
+const authBar = document.getElementById('authBar');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -62,10 +64,18 @@ const fullyValidForm = (...args) => {
 // switch to dashboard 
 const switchToDashboard = (email, currentView) => {
     const user = database.getItem(email);
-    console.log(user);
+    const userContext = JSON.parse(user);
 
     currentView.classList.toggle('visually-hidden');
     dashboard.classList.toggle('visually-hidden');
+    authBar.classList.toggle('visually-hidden');
+
+    const userView = {
+        'userEmail': userContext['email'],
+        'userLists': userContext['lists']
+    }
+
+    return userView;
 }
 
 // user existence check
@@ -177,6 +187,7 @@ signupSubmit.addEventListener('click', (e) => {
         // switch to dashboard
         if (loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
             'User with password entered does not exist')) {
+            // switch to dashboard
             switchToDashboard(userInfo['email'], signupForm);
         } else {
             loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
@@ -239,7 +250,6 @@ loginSubmit.addEventListener('click', (e) => {
             'email': loginEmailAddress.value,
             'password': loginPassword.value
         };
-        console.log(userInfo);
 
         if (userExists(userInfo, userExistenceError, 'User with email entered does not exist')) {
             if (loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
