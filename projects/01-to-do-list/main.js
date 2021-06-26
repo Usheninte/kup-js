@@ -288,6 +288,19 @@ logout.addEventListener('click', () => {
     dashboard.classList.toggle('visually-hidden');
     authBar.classList.toggle('visually-hidden');
 
+    // clear sign up values
+    const regFirstName = document.getElementById('registerFirstName');
+    const regLastName = document.getElementById('registerLastName');
+    const regEmailAddress = document.getElementById('registerEmailAddress');
+    const regPassword = document.getElementById('registerPassword');
+    const regTerms = document.getElementById('registerTerms');
+
+    regFirstName.value = '';
+    regLastName.value = '';
+    regEmailAddress.value = '';
+    regPassword.value = '';
+    regTerms.checked = false;
+
     // clear log out form values
     const loginEmailAddress = document.getElementById('loginEmailAddress');
     const loginPassword = document.getElementById('loginPassword');
