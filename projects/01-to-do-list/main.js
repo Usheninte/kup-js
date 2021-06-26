@@ -133,12 +133,12 @@ signupSubmit.addEventListener('click', (e) => {
 
     // input errors DOM extraction
     const regFirstNameError = document.getElementById('registerFirstNameError');
-    const registerFirstNameLengthError = document.getElementById('registerFirstNameLengthError');
+    const regFirstNameLengthError = document.getElementById('registerFirstNameLengthError');
     const regLastNameError = document.getElementById('registerLastNameError');
-    const registerLastNameLengthError = document.getElementById('registerLastNameLengthError');
+    const regLastNameLengthError = document.getElementById('registerLastNameLengthError');
     const regEmailAddressError = document.getElementById('registerEmailAddressError');
-    const registerEmailAddressLengthError = document.getElementById('registerEmailAddressLengthError');
-    const registerEmailAddressContentError = document.getElementById('registerEmailAddressContentError');
+    const regEmailAddressLengthError = document.getElementById('registerEmailAddressLengthError');
+    const regEmailAddressContentError = document.getElementById('registerEmailAddressContentError');
     const regPasswordError = document.getElementById('registerPasswordError');
     const regPasswordLengthError = document.getElementById('registerPasswordLengthError');
     const regTermsError = document.getElementById('registerTermsError');
@@ -277,9 +277,19 @@ logout.addEventListener('click', () => {
     dashboard.classList.toggle('visually-hidden');
     authBar.classList.toggle('visually-hidden');
 
+    // clear log out form values
     const loginEmailAddress = document.getElementById('loginEmailAddress');
     const loginPassword = document.getElementById('loginPassword');
 
     loginEmailAddress.value = '';
     loginPassword.value = '';
 });
+
+// // account settings flow
+// accountSettings.addEventListener('click', () => {
+//     // remove dashboard and authBar
+//     dashboard.classList.toggle('visually-hidden');
+//     authBar.classList.toggle('visually-hidden');
+
+
+// });
