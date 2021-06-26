@@ -116,6 +116,46 @@
             </div>
         </div>
 
+        <div id="updateForm" class="row visually-hidden">
+            <div class="col-10 col-md-4 py-2">
+                <h4 class="text-primary text-underline">Update Profile</h4>
+                <form>
+                    <div class="my-3">
+                        <label for="updateFirstName" class="form-label">First name</label>
+                        <span id="updateFirstNameError" class="error-note"></span>
+                        <span id="updateFirstNameLengthError" class="error-note"></span>
+                        <input type="text" class="form-control" id="updateFirstName">
+                    </div>
+                    <div class="my-3">
+                        <label for="updateLastName" class="form-label">Last name</label>
+                        <span id="updateLastNameError" class="error-note"></span>
+                        <span id="updateLastNameLengthError" class="error-note"></span>
+                        <input type="text" class="form-control" id="updateLastName">
+                    </div>
+                    <div class="my-3">
+                        <label for="updateEmailAddress" class="form-label">Email address</label>
+                        <span id="updateEmailAddressError" class="error-note"></span>
+                        <span id="updateEmailAddressLengthError" class="error-note"></span>
+                        <span id="updateEmailAddressContentError" class="error-note"></span>
+                        <input type="email" class="form-control" id="updateEmailAddress">
+                    </div>
+                    <div class="my-3">
+                        <label for="updatePassword" class="form-label">Password</label>
+                        <span id="updatePasswordError" class="error-note"></span>
+                        <span id="updatePasswordLengthError" class="error-note"></span>
+                        <input type="password" class="form-control" id="updatePassword">
+                    </div>
+                    <div class="form-check my-3">
+                        <label for="updateTerms" class="form-check-label">
+                            I agree to the Terms of Use</label>
+                        <input class="form-check-input" type="checkbox" id="updateTerms">
+                        <p id="updateTermsError" class="error-note"></p>
+                    </div>
+                    <button class="btn btn-dark my-3" id="updateSubmit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+
         <!-- <div id="" class="row visually-hidden">
             <div class="col-10 col-md-4 py-2">
                 <h4 class="text-primary text-underline"></h4>
