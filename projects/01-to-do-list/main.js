@@ -276,4 +276,10 @@ logout.addEventListener('click', () => {
     baseView.classList.toggle('visually-hidden');
     dashboard.classList.toggle('visually-hidden');
     authBar.classList.toggle('visually-hidden');
+
+    const loginEmailAddress = document.getElementById('loginEmailAddress');
+    const loginPassword = document.getElementById('loginPassword');
+
+    loginEmailAddress.value = '';
+    loginPassword.value = '';
 });
