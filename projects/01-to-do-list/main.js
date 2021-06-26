@@ -78,7 +78,7 @@ const switchToDashboard = (email, currentView) => {
         'userLists': userContext['lists']
     }
 
-    return userView;
+    content.innerText = JSON.stringify(userView);
 }
 
 // user existence check
@@ -313,21 +313,34 @@ logout.addEventListener('click', () => {
 accountSettings.addEventListener('click', () => {
     // remove dashboard and authBar
     dashboard.classList.toggle('visually-hidden');
-    authBar.classList.toggle('visually-hidden');
     updateForm.classList.toggle('visually-hidden');
 
-    // input DOM extraction
+    // get current user information
+    const loginEmailAddress = document.getElementById('loginEmailAddress');
+    const currentUser = database.getItem(loginEmailAddress.value);
+    const userInformation = JSON.parse(currentUser);
+
+    // update DOM values
     const updateFirstName = document.getElementById('updateFirstName');
     const updateLastName = document.getElementById('updateLastName');
     const updateEmailAddress = document.getElementById('updateEmailAddress');
     const updatePassword = document.getElementById('updatePassword');
     const updateTerms = document.getElementById('updateTerms');
 
-    updateFirstName.value = regFirstName.value;
-    updateLastName.value = regLastName.value;
-    updateEmailAddress.value = regEmailAddress.value;
-    updatePassword.value = regPassword.value;
-    updateTerms.value = regTerms.value;
+    updateFirstName.value = userInformation['firstName'];
+    updateLastName.value = userInformation['lastName'];
+    updateEmailAddress.value = userInformation['email'];
+    updatePassword.value = userInformation['password'];
+    updateTerms.checked = userInformation['terms'];
+});
+
+updateForm.addEventListener('click', () => {
+    // input DOM extraction
+    const updateFirstName = document.getElementById('updateFirstName');
+    const updateLastName = document.getElementById('updateLastName');
+    const updateEmailAddress = document.getElementById('updateEmailAddress');
+    const updatePassword = document.getElementById('updatePassword');
+    const updateTerms = document.getElementById('updateTerms');
 
     // input errors DOM extraction
     const updateFirstNameError = document.getElementById('updateFirstNameError');
