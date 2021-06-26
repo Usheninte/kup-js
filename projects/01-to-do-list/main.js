@@ -8,6 +8,8 @@ const login = document.getElementById('login');
 const dashboard = document.getElementById('dashboard');
 const content = document.getElementById('content');
 const authBar = document.getElementById('authBar');
+const logout = document.getElementById('logout');
+const accountSettings = document.getElementById('accountSettings');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -256,6 +258,7 @@ loginSubmit.addEventListener('click', (e) => {
                 'User with password entered does not exist')) {
                 // switch to dashboard
                 switchToDashboard(userInfo['email'], loginForm);
+                // content.innerText = switchToDashboard(userInfo['email'], loginForm);
             } else {
                 loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
                     'User with password entered does not exist');
@@ -266,4 +269,11 @@ loginSubmit.addEventListener('click', (e) => {
     }
 
     e.preventDefault();
+});
+
+// log out flow
+logout.addEventListener('click', () => {
+    baseView.classList.toggle('visually-hidden');
+    dashboard.classList.toggle('visually-hidden');
+    authBar.classList.toggle('visually-hidden');
 });
