@@ -120,23 +120,23 @@ const registerUser = (userInformation) => {
 
 // populate user information from local storage
 
-// const accountInformation = (userInformation) => {
-//     const currentUser = database.getItem(userInformation['email']);
-//     const userInfo = JSON.parse(currentUser);
+const accountInformation = (userInformation) => {
+    const currentUser = database.getItem(userInformation['email']);
+    const userInfo = JSON.parse(currentUser);
 
-//     // update DOM values
-//     const updateFirstName = document.getElementById('updateFirstName');
-//     const updateLastName = document.getElementById('updateLastName');
-//     const updateEmailAddress = document.getElementById('updateEmailAddress');
-//     const updatePassword = document.getElementById('updatePassword');
-//     const updateTerms = document.getElementById('updateTerms');
+    // update DOM values
+    const updateFirstName = document.getElementById('updateFirstName');
+    const updateLastName = document.getElementById('updateLastName');
+    const updateEmailAddress = document.getElementById('updateEmailAddress');
+    const updatePassword = document.getElementById('updatePassword');
+    const updateTerms = document.getElementById('updateTerms');
 
-//     updateFirstName.value = userInfo['firstName'];
-//     updateLastName.value = userInfo['lastName'];
-//     updateEmailAddress.value = userInfo['email'];
-//     updatePassword.value = userInfo['password'];
-//     updateTerms.checked = userInfo['terms'];
-// }
+    updateFirstName.value = userInfo['firstName'];
+    updateLastName.value = userInfo['lastName'];
+    updateEmailAddress.value = userInfo['email'];
+    updatePassword.value = userInfo['password'];
+    updateTerms.checked = userInfo['terms'];
+}
 
 // sign up flow
 signup.addEventListener('click', () => {
