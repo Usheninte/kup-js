@@ -334,7 +334,9 @@ accountSettings.addEventListener('click', () => {
     updateForm.classList.toggle('visually-hidden');
 });
 
-updateForm.addEventListener('click', () => {
+const updateSubmit = document.getElementById('updateSubmit');
+
+updateSubmit.addEventListener('click', (e) => {
     // input DOM extraction
     const updateFirstName = document.getElementById('updateFirstName');
     const updateLastName = document.getElementById('updateLastName');
@@ -395,18 +397,14 @@ updateForm.addEventListener('click', () => {
         };
 
         // register user
-        updateUser(userInfo);
+        registerUser(userInfo);
+
+        // notify of profile update
+        alert('Profile updated');
 
         // switch to dashboard
-        if (loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
-            'User with password entered does not exist')) {
-            // switch to dashboard
-            switchToDashboard(userInfo['email'], signupForm);
-        } else {
-            loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
-                'User with password entered does not exist');
-        }
-
-        console.log(userInfo);
+        // switchToDashboard(userInfo['email'], updateForm);
     }
+
+    e.preventDefault();
 });
