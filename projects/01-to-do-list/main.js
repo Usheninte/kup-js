@@ -1,6 +1,9 @@
 // local storage as database
 const database = window.localStorage;
 
+// current user values
+let currentUserDetails;
+
 // views
 const baseView = document.getElementById('baseView');
 const signup = document.getElementById('signup');
@@ -13,6 +16,9 @@ const accountSettings = document.getElementById('accountSettings');
 const updateForm = document.getElementById('updateForm');
 const createNewList = document.getElementById('createNewList');
 const lists = document.getElementById('lists');
+const newList = document.getElementById('newList');
+const newList2Dashboard = document.getElementById('newList2Dashboard');
+const createListSubmit = document.getElementById('createListSubmit');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -73,26 +79,33 @@ const switchToDashboard = (email, currentView) => {
 
     currentView.classList.toggle('visually-hidden');
     dashboard.classList.toggle('visually-hidden');
-    authBar.classList.toggle('visually-hidden');
+    if (authBar.classList.contains('visually-hidden')) {
+        authBar.classList.toggle('visually-hidden');
+    }
 
     const userView = {
         'userEmail': userContext['email'],
         'userLists': userContext['lists']
     }
 
-    if (userView['userLists'].length === 0) {
-        const listStatus = document.createElement('div');
+    currentUserDetails = userView;
 
-        const listStatusIcon = document.createElement('i');
-        listStatusIcon.className = 'bi bi-info-circle-fill';
+    if (currentUserDetails['userLists'].length === 0) {
+        const noListNotice = document.getElementById('noListNotice');
+        noListNotice.classList.toggle('visually-hidden');
+    } else {
+        const listingsHeader = document.getElementById('listingsHeader');
+        listingsHeader.classList.toggle('visually-hidden');
 
-        const listStatusNote = document.createElement('span');
-        listStatusNote.innerText = '   No lists exist';
+        const listings = document.createElement('ul');
 
-        listStatus.appendChild(listStatusIcon);
-        listStatus.appendChild(listStatusNote);
+        for (let listElement of currentUserDetails['userLists']) {
+            const listItem = document.createElement('li');
+            listItem.innerText = listElement['name'];
+            listings.appendChild(listItem);
+        }
 
-        lists.appendChild(listStatus);
+        lists.appendChild(listings);
     }
 }
 
@@ -322,6 +335,10 @@ logout.addEventListener('click', () => {
         updateForm.classList.toggle('visually-hidden');
     }
 
+    if (!newList.classList.contains('visually-hidden')) {
+        newList.classList.toggle('visually-hidden');
+    }
+
     // clear sign up values
     const regFirstName = document.getElementById('registerFirstName');
     const regLastName = document.getElementById('registerLastName');
@@ -341,6 +358,12 @@ logout.addEventListener('click', () => {
 
     loginEmailAddress.value = '';
     loginPassword.value = '';
+
+    // reset current user details
+    currentUserDetails = {};
+
+    // refresh page
+    window.location.reload();
 });
 
 // account settings flow
@@ -421,6 +444,49 @@ updateSubmit.addEventListener('click', (e) => {
         // switch to dashboard
         // switchToDashboard(userInfo['email'], updateForm);
     }
+
+    e.preventDefault();
+});
+
+// create new list
+createNewList.addEventListener('click', (e) => {
+    dashboard.classList.toggle('visually-hidden');
+    newList.classList.toggle('visually-hidden');
+});
+
+// switch from new list to dashboard
+newList2Dashboard.addEventListener('click', (e) => {
+    newList.classList.toggle('visually-hidden');
+    dashboard.classList.toggle('visually-hidden');
+});
+
+// submit create list form behaviour
+createListSubmit.addEventListener('click', (e) => {
+    // form value
+    const listName = document.getElementById('listName');
+
+    // save list name to new object
+    let newListValues = {};
+    newListValues['name'] = listName.value;
+    console.log(newListValues);
+
+    // update database list with new name
+    let dbState = JSON.parse(
+        database.getItem(`${currentUserDetails['userEmail']}`)
+    );
+    dbState['lists'].push(newListValues);
+    // console.log("DB STATE: " + JSON.stringify(dbState));
+    database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
+
+    // notify of to-do list creation
+    alert('To-do list created');
+
+    listName.value = '';
+
+    // // switch to dashboard
+    // newList.classList.toggle('visually-hidden');
+    // dashboard.classList.toggle('visually-hidden');
+    switchToDashboard(currentUserDetails['userEmail'], newList);
 
     e.preventDefault();
 });

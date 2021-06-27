@@ -111,20 +111,29 @@
             <div class="col-10 col-md-4 py-2">
                 <h4 class="text-primary text-underline">Dashboard</h4>
                 <button id="createNewList" class="btn btn-dark my-1">Create New to-do List</button>
-                <div id="lists" class="my-3"></div>
+                <div id="lists" class="my-3">
+                    <p class="visually-hidden" id="noListNotice">
+                        <i class="bi bi-info-circle-fill me-1"></i>
+                        No lists exist
+                    </p>
+                    <h4 id="listingsHeader" class="visually-hidden my-3">Lists</h4>
+                </div>
             </div>
         </div>
 
         <div id="newList" class="row visually-hidden">
             <div class="col-10 col-md-4 py-2">
+                <button id="newList2Dashboard" class="btn btn-outline-dark my-3">
+                    <i class="bi bi-backspace-fill"></i> Back
+                </button>
                 <h4 class="text-primary text-underline">Create New to-do List</h4>
                 <form>
                     <div class="my-3">
-                        <label for="updateFirstName" class="form-label">First name</label>
-                        <span id="updateFirstNameError" class="error-note"></span>
-                        <span id="updateFirstNameLengthError" class="error-note"></span>
-                        <input type="text" class="form-control" id="updateFirstName">
+                        <label for="listName" class="form-label">To-do list name</label>
+                        <span id="listNameError" class="error-note"></span>
+                        <input type="text" class="form-control" id="listName">
                     </div>
+                    <button class="btn btn-dark my-3" id="createListSubmit">Save</button>
                 </form>
             </div>
         </div>
