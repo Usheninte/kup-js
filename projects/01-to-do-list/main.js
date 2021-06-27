@@ -11,6 +11,8 @@ const authBar = document.getElementById('authBar');
 const logout = document.getElementById('logout');
 const accountSettings = document.getElementById('accountSettings');
 const updateForm = document.getElementById('updateForm');
+const createNewList = document.getElementById('createNewList');
+const lists = document.getElementById('lists');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -78,7 +80,20 @@ const switchToDashboard = (email, currentView) => {
         'userLists': userContext['lists']
     }
 
-    content.innerText = JSON.stringify(userView);
+    if (userView['userLists'].length === 0) {
+        const listStatus = document.createElement('div');
+
+        const listStatusIcon = document.createElement('i');
+        listStatusIcon.className = 'bi bi-info-circle-fill';
+
+        const listStatusNote = document.createElement('span');
+        listStatusNote.innerText = '   No lists exist';
+
+        listStatus.appendChild(listStatusIcon);
+        listStatus.appendChild(listStatusNote);
+
+        lists.appendChild(listStatus);
+    }
 }
 
 // user existence check

@@ -110,9 +110,22 @@
         <div id="dashboard" class="row visually-hidden">
             <div class="col-10 col-md-4 py-2">
                 <h4 class="text-primary text-underline">Dashboard</h4>
-                <div>
-                    <div id="content"></div>
-                </div>
+                <button id="createNewList" class="btn btn-dark my-1">Create New to-do List</button>
+                <div id="lists" class="my-3"></div>
+            </div>
+        </div>
+
+        <div id="newList" class="row visually-hidden">
+            <div class="col-10 col-md-4 py-2">
+                <h4 class="text-primary text-underline">Create New to-do List</h4>
+                <form>
+                    <div class="my-3">
+                        <label for="updateFirstName" class="form-label">First name</label>
+                        <span id="updateFirstNameError" class="error-note"></span>
+                        <span id="updateFirstNameLengthError" class="error-note"></span>
+                        <input type="text" class="form-control" id="updateFirstName">
+                    </div>
+                </form>
             </div>
         </div>
 
