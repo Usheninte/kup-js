@@ -442,7 +442,7 @@ updateSubmit.addEventListener('click', (e) => {
         alert('Profile updated');
 
         // switch to dashboard
-        // switchToDashboard(userInfo['email'], updateForm);
+        switchToDashboard(userInfo['email'], updateForm);
     }
 
     e.preventDefault();
@@ -462,31 +462,37 @@ newList2Dashboard.addEventListener('click', (e) => {
 
 // submit create list form behaviour
 createListSubmit.addEventListener('click', (e) => {
-    // form value
+    // form validation
     const listName = document.getElementById('listName');
+    const listNameError = document.getElementById('listNameError');
 
-    // save list name to new object
-    let newListValues = {};
-    newListValues['name'] = listName.value;
-    console.log(newListValues);
+    generalValidation(listName.value, listNameError, 'List name can not be empty');
 
-    // update database list with new name
-    let dbState = JSON.parse(
-        database.getItem(`${currentUserDetails['userEmail']}`)
+    const inputValid = fullyValidForm(
+        generalValidation(listName.value, listNameError, 'List name can not be empty')
     );
-    dbState['lists'].push(newListValues);
-    // console.log("DB STATE: " + JSON.stringify(dbState));
-    database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
 
-    // notify of to-do list creation
-    alert('To-do list created');
+    if (inputValid) {
+        // save list name to new object
+        let newListValues = {};
+        newListValues['name'] = listName.value;
+        console.log(newListValues);
 
-    listName.value = '';
+        // update database list with new name
+        let dbState = JSON.parse(
+            database.getItem(`${currentUserDetails['userEmail']}`)
+        );
+        dbState['lists'].push(newListValues);
+        database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
 
-    // // switch to dashboard
-    // newList.classList.toggle('visually-hidden');
-    // dashboard.classList.toggle('visually-hidden');
-    switchToDashboard(currentUserDetails['userEmail'], newList);
+        // notify of to-do list creation
+        alert('To-do list created');
+
+        listName.value = '';
+
+        // // switch to dashboard
+        switchToDashboard(currentUserDetails['userEmail'], newList);
+    }
 
     e.preventDefault();
 });
