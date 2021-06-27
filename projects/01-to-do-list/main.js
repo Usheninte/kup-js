@@ -95,12 +95,15 @@ const switchToDashboard = (email, currentView) => {
         listingsHeader.classList.toggle('visually-hidden');
 
         const listings = document.createElement('div');
+        let id = 0;
 
         for (let listElement of currentUserDetails['userLists']) {
+            id++;
             const listIcon = document.createElement('i');
             listIcon.className = 'bi bi-arrow-right';
 
             const listItem = document.createElement('button');
+            listItem.id = `listItem-${id}`;
             listItem.className = 'btn btn-outline-dark my-1';
             listItem.innerHTML = `${listElement['name']}   `;
 
