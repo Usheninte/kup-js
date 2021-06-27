@@ -90,18 +90,21 @@ const switchToDashboard = (email, currentView) => {
 
     currentUserDetails = userView;
 
-    if (currentUserDetails['userLists'].length === 0) {
-        const noListNotice = document.getElementById('noListNotice');
-        noListNotice.classList.toggle('visually-hidden');
-    } else {
+    if (currentUserDetails['userLists'].length > 0) {
         const listingsHeader = document.getElementById('listingsHeader');
         listingsHeader.classList.toggle('visually-hidden');
 
-        const listings = document.createElement('ul');
+        const listings = document.createElement('div');
 
         for (let listElement of currentUserDetails['userLists']) {
-            const listItem = document.createElement('li');
-            listItem.innerText = listElement['name'];
+            const listIcon = document.createElement('i');
+            listIcon.className = 'bi bi-arrow-right';
+
+            const listItem = document.createElement('button');
+            listItem.className = 'btn btn-outline-dark my-1';
+            listItem.innerHTML = `${listElement['name']}   `;
+
+            listItem.appendChild(listIcon);
             listings.appendChild(listItem);
         }
 
