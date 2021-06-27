@@ -213,6 +213,7 @@ signupSubmit.addEventListener('click', (e) => {
             'User with password entered does not exist')) {
             // switch to dashboard
             switchToDashboard(userInfo['email'], signupForm);
+            accountInformation(userInfo);
         } else {
             loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
                 'User with password entered does not exist');
