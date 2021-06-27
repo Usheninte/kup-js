@@ -118,14 +118,25 @@ const registerUser = (userInformation) => {
     database.setItem(`${userInformation['email']}`, JSON.stringify(userInformation));
 }
 
-// update user in local storage
+// populate user information from local storage
 
-const updateUser = (userInformation) => {
-    // const userInfoBase = database.getItem(`${userInformation['email']}`);
+// const accountInformation = (userInformation) => {
+//     const currentUser = database.getItem(userInformation['email']);
+//     const userInfo = JSON.parse(currentUser);
 
-    // const userInformationValues = JSON.parse(userInfoBase);
-    database.setItem(`${userInformation['email']}`, json.stringify(userInformation));
-}
+//     // update DOM values
+//     const updateFirstName = document.getElementById('updateFirstName');
+//     const updateLastName = document.getElementById('updateLastName');
+//     const updateEmailAddress = document.getElementById('updateEmailAddress');
+//     const updatePassword = document.getElementById('updatePassword');
+//     const updateTerms = document.getElementById('updateTerms');
+
+//     updateFirstName.value = userInfo['firstName'];
+//     updateLastName.value = userInfo['lastName'];
+//     updateEmailAddress.value = userInfo['email'];
+//     updatePassword.value = userInfo['password'];
+//     updateTerms.checked = userInfo['terms'];
+// }
 
 // sign up flow
 signup.addEventListener('click', () => {
@@ -269,7 +280,7 @@ loginSubmit.addEventListener('click', (e) => {
                 'User with password entered does not exist')) {
                 // switch to dashboard
                 switchToDashboard(userInfo['email'], loginForm);
-                // content.innerText = switchToDashboard(userInfo['email'], loginForm);
+                accountInformation(userInfo);
             } else {
                 loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
                     'User with password entered does not exist');
@@ -285,8 +296,15 @@ loginSubmit.addEventListener('click', (e) => {
 // log out flow
 logout.addEventListener('click', () => {
     baseView.classList.toggle('visually-hidden');
-    dashboard.classList.toggle('visually-hidden');
     authBar.classList.toggle('visually-hidden');
+
+    if (!dashboard.classList.contains('visually-hidden')) {
+        dashboard.classList.toggle('visually-hidden');
+    }
+
+    if (!updateForm.classList.contains('visually-hidden')) {
+        updateForm.classList.toggle('visually-hidden');
+    }
 
     // clear sign up values
     const regFirstName = document.getElementById('registerFirstName');
@@ -314,24 +332,6 @@ accountSettings.addEventListener('click', () => {
     // remove dashboard and authBar
     dashboard.classList.toggle('visually-hidden');
     updateForm.classList.toggle('visually-hidden');
-
-    // get current user information
-    const loginEmailAddress = document.getElementById('loginEmailAddress');
-    const currentUser = database.getItem(loginEmailAddress.value);
-    const userInformation = JSON.parse(currentUser);
-
-    // update DOM values
-    const updateFirstName = document.getElementById('updateFirstName');
-    const updateLastName = document.getElementById('updateLastName');
-    const updateEmailAddress = document.getElementById('updateEmailAddress');
-    const updatePassword = document.getElementById('updatePassword');
-    const updateTerms = document.getElementById('updateTerms');
-
-    updateFirstName.value = userInformation['firstName'];
-    updateLastName.value = userInformation['lastName'];
-    updateEmailAddress.value = userInformation['email'];
-    updatePassword.value = userInformation['password'];
-    updateTerms.checked = userInformation['terms'];
 });
 
 updateForm.addEventListener('click', () => {
