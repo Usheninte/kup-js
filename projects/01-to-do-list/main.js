@@ -17,6 +17,7 @@ const updateForm = document.getElementById('updateForm');
 const updateForm2Dashboard = document.getElementById('updateForm2Dashboard');
 const createNewList = document.getElementById('createNewList');
 const lists = document.getElementById('lists');
+const listings = document.getElementById('listings');
 const newList = document.getElementById('newList');
 const newList2Dashboard = document.getElementById('newList2Dashboard');
 const createListSubmit = document.getElementById('createListSubmit');
@@ -93,30 +94,8 @@ const switchToDashboard = (email, currentView) => {
 
     currentUserDetails = userView;
 
-    if (currentUserDetails['userLists'].length > 0) {
-        const listingsHeader = document.getElementById('listingsHeader');
-        listingsHeader.classList.toggle('visually-hidden');
-
-        const listings = document.createElement('div');
-        let id = 0;
-
-        for (let listElement of currentUserDetails['userLists']) {
-            const listIcon = document.createElement('i');
-            listIcon.className = 'bi bi-arrow-right';
-
-            const listItem = document.createElement('button');
-            listItem.id = `listItem-${id}`;
-            listItem.className = 'btn btn-outline-dark my-1 list-button';
-            listItem.innerHTML = `${listElement['name']}   `;
-
-            listItem.appendChild(listIcon);
-            listings.appendChild(listItem);
-
-            id++;
-        }
-
-        lists.appendChild(listings);
-    }
+    // dashboard content
+    dashboardContent(currentUserDetails);
 }
 
 // user existence check
@@ -527,6 +506,30 @@ createListSubmit.addEventListener('click', (e) => {
 // });
 
 // dashboard view
-// const dashboardContent = (userDetails) => {
+const dashboardContent = (userDetails) => {
+    if (userDetails['userLists'].length > 0) {
+        const listingsHeader = document.getElementById('listingsHeader');
+        listingsHeader.classList.toggle('visually-hidden');
 
-// }
+        listings.innerHTML = '';
+
+        let id = 0;
+
+        for (let listElement of userDetails['userLists']) {
+            const listIcon = document.createElement('i');
+            listIcon.className = 'bi bi-arrow-right';
+
+            const listItem = document.createElement('button');
+            listItem.id = `listItem-${id}`;
+            listItem.className = 'btn btn-outline-dark my-1 list-button';
+            listItem.innerHTML = `${listElement['name']}   `;
+
+            listItem.appendChild(listIcon);
+            listings.appendChild(listItem);
+
+            id++;
+        }
+
+        lists.appendChild(listings);
+    }
+}
