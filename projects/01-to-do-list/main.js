@@ -537,6 +537,9 @@ const dashboardContent = (userDetails) => {
             listItem.addEventListener('click', () => {
                 console.log(listItem);
                 console.log(`List item: ${extractListItem(listItem, userDetails)}`);
+                // switch to independent view based of extracted list item
+                // display to-do list items if exist
+                // display button to create to-do list item 
             });
 
             id++;
