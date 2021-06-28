@@ -369,6 +369,12 @@ accountSettings.addEventListener('click', () => {
         newList.classList.toggle('visually-hidden');
         updateForm.classList.toggle('visually-hidden');
     }
+
+    if (!todoList.classList.contains('visually-hidden')
+        && dashboard.classList.contains('visually-hidden')) {
+        todoList.classList.toggle('visually-hidden');
+        updateForm.classList.toggle('visually-hidden');
+    }
 });
 
 // switch from update form to dashboard
