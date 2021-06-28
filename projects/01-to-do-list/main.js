@@ -28,6 +28,7 @@ const todoList2Dashboard = document.getElementById('todoList2Dashboard');
 const createNewListItem = document.getElementById('createNewListItem');
 const newListItem = document.getElementById('newListItem');
 const newListItem2todoList = document.getElementById('newListItem2todoList');
+const creatListItemSubmit = document.getElementById('creatListItemSubmit');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -378,6 +379,12 @@ accountSettings.addEventListener('click', () => {
         todoList.classList.toggle('visually-hidden');
         updateForm.classList.toggle('visually-hidden');
     }
+
+    if (!newListItem.classList.contains('visually-hidden')
+        && dashboard.classList.contains('visually-hidden')) {
+        newListItem.classList.toggle('visually-hidden');
+        updateForm.classList.toggle('visually-hidden');
+    }
 });
 
 // switch from update form to dashboard
@@ -561,9 +568,6 @@ const dashboardContent = (userDetails) => {
 
                 // display to-do list name
                 todoListName.innerText = listItemInfo['name'];
-
-                // display to-do list items if exist
-                // display button to create to-do list item 
             });
 
             id++;
@@ -592,4 +596,11 @@ createNewListItem.addEventListener('click', () => {
 newListItem2todoList.addEventListener('click', () => {
     newListItem.classList.toggle('visually-hidden');
     todoList.classList.toggle('visually-hidden');
+});
+
+creatListItemSubmit.addEventListener('click', (e) => {
+
+
+    // prevent page refresh
+    e.preventDefault();
 });
