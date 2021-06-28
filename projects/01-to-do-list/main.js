@@ -573,6 +573,9 @@ const dashboardContent = (userDetails) => {
 todoList2Dashboard.addEventListener('click', () => {
     todoList.classList.toggle('visually-hidden');
     dashboard.classList.toggle('visually-hidden');
+
+    // reset to-do list name
+    todoListName.innerText = '';
 });
 
 // // behaviour on to-do list button click
