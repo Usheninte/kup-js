@@ -500,12 +500,15 @@ createListSubmit.addEventListener('click', (e) => {
     e.preventDefault();
 });
 
-// behaviour on to-do list button click
-// todoListButton.addEventListener('click', () => {
-//     for (let todo of currentUserDetails['userLists'])
-// });
-
 // dashboard view
+const extractListItem = (listItemInfo, userInformation) => {
+    const listId = listItemInfo.id;
+    const listIdInfo = listId.split('-');
+    const listIndex = listIdInfo[1]; // get dynamically set ID
+    const listItem = JSON.stringify(userInformation['userLists'][parseInt(listIndex)]);
+    return listItem;
+}
+
 const dashboardContent = (userDetails) => {
     if (userDetails['userLists'].length > 0) {
         const listingsHeader = document.getElementById('listingsHeader');
@@ -519,13 +522,22 @@ const dashboardContent = (userDetails) => {
             const listIcon = document.createElement('i');
             listIcon.className = 'bi bi-arrow-right';
 
+            const listText = document.createElement('span');
+            listText.innerText = `${listElement['name']} `;
+
             const listItem = document.createElement('button');
             listItem.id = `listItem-${id}`;
             listItem.className = 'btn btn-outline-dark my-1 list-button';
-            listItem.innerHTML = `${listElement['name']}   `;
 
+            listItem.appendChild(listText);
             listItem.appendChild(listIcon);
             listings.appendChild(listItem);
+
+            // behaviour on to-do list button click
+            listItem.addEventListener('click', () => {
+                console.log(listItem);
+                console.log(`List item: ${extractListItem(listItem, userDetails)}`);
+            });
 
             id++;
         }
@@ -533,3 +545,12 @@ const dashboardContent = (userDetails) => {
         lists.appendChild(listings);
     }
 }
+
+// // behaviour on to-do list button click
+// todoListButton.addEventListener('click', () => {
+//     for (let todo of currentUserDetails['userLists']) {
+//         if (todo['name'] === todoListButton.innerText) {
+//             console.log(todo);
+//         }
+//     }
+// });
