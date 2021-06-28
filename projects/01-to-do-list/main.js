@@ -29,6 +29,7 @@ const createNewListItem = document.getElementById('createNewListItem');
 const newListItem = document.getElementById('newListItem');
 const newListItem2todoList = document.getElementById('newListItem2todoList');
 const creatListItemSubmit = document.getElementById('creatListItemSubmit');
+const todoListItems = document.getElementById('todoListItems');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -572,6 +573,9 @@ const dashboardContent = (userDetails) => {
 
                 // display to-do list name
                 todoListName.innerText = listItemInfo['name'];
+
+                // switch to to-do list
+                switchToList(currentUserDetails);
             });
 
             id++;
@@ -601,6 +605,41 @@ newListItem2todoList.addEventListener('click', () => {
     newListItem.classList.toggle('visually-hidden');
     todoList.classList.toggle('visually-hidden');
 });
+
+const switchToList = (userDetails) => {
+    if (!newListItem.classList.contains('visually-hidden')) {
+        newListItem.classList.toggle('visually-hidden');
+        todoList.classList.toggle('visually-hidden');
+    }
+
+    if (!dashboard.classList.contains('visually-hidden')) {
+        dashboard.classList.toggle('visually-hidden');
+        todoList.classList.toggle('visually-hidden');
+    }
+
+    if (userDetails['userLists'].length > 0) {
+        for (let listElement of userDetails['userLists']) {
+            if (listElement['name'] === todoListName.innerText) {
+                let id = 0;
+
+                todoListItems.innerHTML = '';
+
+                for (let innerItem of listElement['items']) {
+                    const listInnerBlock = document.createElement('div');
+
+                    const listInnerItem = document.createElement('button');
+                    listInnerItem.id = `listInnerItem-${id}`;
+                    listInnerItem.className = 'btn btn-outline-dark my-1 list-button';
+                    listInnerItem.innerText = `${innerItem['item']}`;
+
+                    listInnerBlock.appendChild(listInnerItem);
+                    todoListItems.appendChild(listInnerBlock);
+                    id++;
+                }
+            }
+        }
+    }
+}
 
 creatListItemSubmit.addEventListener('click', (e) => {
     // input DOM extraction
@@ -656,8 +695,7 @@ creatListItemSubmit.addEventListener('click', (e) => {
         alert('To-do list item added');
 
         // switch to to-do list
-        newListItem.classList.toggle('visually-hidden');
-        todoList.classList.toggle('visually-hidden');
+        switchToList(currentUserDetails);
     }
 
     // prevent page refresh
