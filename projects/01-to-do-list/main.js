@@ -20,6 +20,7 @@ const lists = document.getElementById('lists');
 const newList = document.getElementById('newList');
 const newList2Dashboard = document.getElementById('newList2Dashboard');
 const createListSubmit = document.getElementById('createListSubmit');
+const todoListButton = document.getElementsByClassName('list-button');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -105,7 +106,7 @@ const switchToDashboard = (email, currentView) => {
 
             const listItem = document.createElement('button');
             listItem.id = `listItem-${id}`;
-            listItem.className = 'btn btn-outline-dark my-1';
+            listItem.className = 'btn btn-outline-dark my-1 list-button';
             listItem.innerHTML = `${listElement['name']}   `;
 
             listItem.appendChild(listIcon);
@@ -150,13 +151,11 @@ const signupForm = document.getElementById('signupForm');
 const signupSubmit = document.getElementById('signupSubmit');
 
 // register user in local storage
-
 const registerUser = (userInformation) => {
     database.setItem(`${userInformation['email']}`, JSON.stringify(userInformation));
 }
 
 // populate user information from local storage
-
 const accountInformation = (userInformation) => {
     const currentUser = database.getItem(userInformation['email']);
     const userInfo = JSON.parse(currentUser);
@@ -390,6 +389,7 @@ accountSettings.addEventListener('click', () => {
     }
 });
 
+// switch from update form to dashboard
 updateForm2Dashboard.addEventListener('click', () => {
     updateForm.classList.toggle('visually-hidden');
     dashboard.classList.toggle('visually-hidden');
@@ -482,7 +482,7 @@ newList2Dashboard.addEventListener('click', (e) => {
     dashboard.classList.toggle('visually-hidden');
 });
 
-// submit create list form behaviour
+// behaviour on create list submit behaviour
 createListSubmit.addEventListener('click', (e) => {
     // form validation
     const listName = document.getElementById('listName');
@@ -505,6 +505,8 @@ createListSubmit.addEventListener('click', (e) => {
             database.getItem(`${currentUserDetails['userEmail']}`)
         );
         dbState['lists'].push(newListValues);
+        currentUserDetails['userLists'].push(newListValues);
+        console.log('Updated user lists: ' + JSON.stringify(currentUserDetails['userLists']));
         database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
 
         // notify of to-do list creation
@@ -518,3 +520,13 @@ createListSubmit.addEventListener('click', (e) => {
 
     e.preventDefault();
 });
+
+// behaviour on to-do list button click
+// todoListButton.addEventListener('click', () => {
+//     for (let todo of currentUserDetails['userLists'])
+// });
+
+// dashboard view
+// const dashboardContent = (userDetails) => {
+
+// }
