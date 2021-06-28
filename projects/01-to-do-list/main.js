@@ -333,6 +333,14 @@ logout.addEventListener('click', () => {
         newList.classList.toggle('visually-hidden');
     }
 
+    if (!todoList.classList.contains('visually-hidden')) {
+        todoList.classList.toggle('visually-hidden');
+    }
+
+    if (!newListItem.classList.contains('visually-hidden')) {
+        newListItem.classList.toggle('visually-hidden');
+    }
+
     // clear sign up values
     const regFirstName = document.getElementById('registerFirstName');
     const regLastName = document.getElementById('registerLastName');
@@ -355,9 +363,6 @@ logout.addEventListener('click', () => {
 
     // reset current user details
     currentUserDetails = {};
-
-    // refresh page
-    window.location.reload();
 });
 
 // account settings flow
