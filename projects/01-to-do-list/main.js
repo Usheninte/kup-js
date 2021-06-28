@@ -14,6 +14,7 @@ const authBar = document.getElementById('authBar');
 const logout = document.getElementById('logout');
 const accountSettings = document.getElementById('accountSettings');
 const updateForm = document.getElementById('updateForm');
+const updateForm2Dashboard = document.getElementById('updateForm2Dashboard');
 const createNewList = document.getElementById('createNewList');
 const lists = document.getElementById('lists');
 const newList = document.getElementById('newList');
@@ -79,6 +80,7 @@ const switchToDashboard = (email, currentView) => {
 
     currentView.classList.toggle('visually-hidden');
     dashboard.classList.toggle('visually-hidden');
+
     if (authBar.classList.contains('visually-hidden')) {
         authBar.classList.toggle('visually-hidden');
     }
@@ -98,7 +100,6 @@ const switchToDashboard = (email, currentView) => {
         let id = 0;
 
         for (let listElement of currentUserDetails['userLists']) {
-            id++;
             const listIcon = document.createElement('i');
             listIcon.className = 'bi bi-arrow-right';
 
@@ -109,6 +110,8 @@ const switchToDashboard = (email, currentView) => {
 
             listItem.appendChild(listIcon);
             listings.appendChild(listItem);
+
+            id++;
         }
 
         lists.appendChild(listings);
@@ -374,10 +377,23 @@ logout.addEventListener('click', () => {
 
 // account settings flow
 accountSettings.addEventListener('click', () => {
-    // remove dashboard and authBar
-    dashboard.classList.toggle('visually-hidden');
-    updateForm.classList.toggle('visually-hidden');
+    if (!dashboard.classList.contains('visually-hidden')
+        && newList.classList.contains('visually-hidden')) {
+        dashboard.classList.toggle('visually-hidden');
+        updateForm.classList.toggle('visually-hidden');
+    }
+
+    if (!newList.classList.contains('visually-hidden')
+        && dashboard.classList.contains('visually-hidden')) {
+        newList.classList.toggle('visually-hidden');
+        updateForm.classList.toggle('visually-hidden');
+    }
 });
+
+updateForm2Dashboard.addEventListener('click', () => {
+    updateForm.classList.toggle('visually-hidden');
+    dashboard.classList.toggle('visually-hidden');
+})
 
 const updateSubmit = document.getElementById('updateSubmit');
 
