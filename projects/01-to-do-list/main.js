@@ -477,6 +477,7 @@ createListSubmit.addEventListener('click', (e) => {
         // save list name to new object
         let newListValues = {};
         newListValues['name'] = listName.value;
+        newListValues['items'] = [];
         console.log(newListValues);
 
         // update database list with new name
