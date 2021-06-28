@@ -22,6 +22,9 @@ const newList = document.getElementById('newList');
 const newList2Dashboard = document.getElementById('newList2Dashboard');
 const createListSubmit = document.getElementById('createListSubmit');
 const todoListButton = document.getElementsByClassName('list-button');
+const todoList = document.getElementById('todoList');
+const todoListName = document.getElementById('todoListName');
+const todoList2Dashboard = document.getElementById('todoList2Dashboard');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -506,7 +509,7 @@ const extractListItem = (listItemInfo, userInformation) => {
     const listId = listItemInfo.id;
     const listIdInfo = listId.split('-');
     const listIndex = listIdInfo[1]; // get dynamically set ID
-    const listItem = JSON.stringify(userInformation['userLists'][parseInt(listIndex)]);
+    const listItem = userInformation['userLists'][parseInt(listIndex)];
     return listItem;
 }
 
@@ -537,8 +540,19 @@ const dashboardContent = (userDetails) => {
             // behaviour on to-do list button click
             listItem.addEventListener('click', () => {
                 console.log(listItem);
-                console.log(`List item: ${extractListItem(listItem, userDetails)}`);
+                console.log(`List item: ${JSON.stringify(
+                    extractListItem(listItem, userDetails)
+                )}`);
+                // extract list item information
+                const listItemInfo = extractListItem(listItem, userDetails);
+
                 // switch to independent view based of extracted list item
+                dashboard.classList.toggle('visually-hidden');
+                todoList.classList.toggle('visually-hidden');
+
+                // display to-do list name
+                todoListName.innerText = listItemInfo['name'];
+
                 // display to-do list items if exist
                 // display button to create to-do list item 
             });
@@ -549,6 +563,11 @@ const dashboardContent = (userDetails) => {
         lists.appendChild(listings);
     }
 }
+
+todoList2Dashboard.addEventListener('click', () => {
+    todoList.classList.toggle('visually-hidden');
+    dashboard.classList.toggle('visually-hidden');
+});
 
 // // behaviour on to-do list button click
 // todoListButton.addEventListener('click', () => {
