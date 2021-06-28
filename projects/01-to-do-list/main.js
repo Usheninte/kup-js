@@ -25,6 +25,9 @@ const todoListButton = document.getElementsByClassName('list-button');
 const todoList = document.getElementById('todoList');
 const todoListName = document.getElementById('todoListName');
 const todoList2Dashboard = document.getElementById('todoList2Dashboard');
+const createNewListItem = document.getElementById('createNewListItem');
+const newListItem = document.getElementById('newListItem');
+const newListItem2todoList = document.getElementById('newListItem2todoList');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -570,6 +573,7 @@ const dashboardContent = (userDetails) => {
     }
 }
 
+// switch from to-do list to dashboard
 todoList2Dashboard.addEventListener('click', () => {
     todoList.classList.toggle('visually-hidden');
     dashboard.classList.toggle('visually-hidden');
@@ -578,11 +582,14 @@ todoList2Dashboard.addEventListener('click', () => {
     todoListName.innerText = '';
 });
 
-// // behaviour on to-do list button click
-// todoListButton.addEventListener('click', () => {
-//     for (let todo of currentUserDetails['userLists']) {
-//         if (todo['name'] === todoListButton.innerText) {
-//             console.log(todo);
-//         }
-//     }
-// });
+// switch to new list item form
+createNewListItem.addEventListener('click', () => {
+    todoList.classList.toggle('visually-hidden');
+    newListItem.classList.toggle('visually-hidden');
+});
+
+// switch from to-do list to dashboard
+newListItem2todoList.addEventListener('click', () => {
+    newListItem.classList.toggle('visually-hidden');
+    todoList.classList.toggle('visually-hidden');
+});
