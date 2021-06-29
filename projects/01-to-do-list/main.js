@@ -28,8 +28,11 @@ const todoList2Dashboard = document.getElementById('todoList2Dashboard');
 const createNewListItem = document.getElementById('createNewListItem');
 const newListItem = document.getElementById('newListItem');
 const newListItem2todoList = document.getElementById('newListItem2todoList');
-const creatListItemSubmit = document.getElementById('creatListItemSubmit');
+const createListItemSubmit = document.getElementById('createListItemSubmit');
 const todoListItems = document.getElementById('todoListItems');
+const updateListItem = document.getElementById('updateListItem');
+const listItemNameValue = document.getElementById('listItemNameValue');
+const updateListItem2todoList = document.getElementById('updateListItem2todoList');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -646,6 +649,20 @@ const switchToList = (userDetails) => {
                     listInnerItem.appendChild(listInnerText);
                     listInnerBlock.appendChild(listInnerItem);
                     todoListItems.appendChild(listInnerBlock);
+
+                    // behaviour on to-do list button click
+                    listInnerItem.addEventListener('click', () => {
+                        if (innerItem['item'] === listInnerText.innerText.trim()) {
+                            console.log(`To-do list item: ${JSON.stringify(innerItem)}`);
+
+                            // switch to independent view based of extracted list inner item
+                            todoList.classList.toggle('visually-hidden');
+                            updateListItem.classList.toggle('visually-hidden');
+
+
+                        }
+                    });
+
                     id++;
                 }
             }
@@ -653,7 +670,7 @@ const switchToList = (userDetails) => {
     }
 }
 
-creatListItemSubmit.addEventListener('click', (e) => {
+createListItemSubmit.addEventListener('click', (e) => {
     // input DOM extraction
     const listItemName = document.getElementById('listItemName');
     const listItemNameError = document.getElementById('listItemNameError');
@@ -712,4 +729,10 @@ creatListItemSubmit.addEventListener('click', (e) => {
 
     // prevent page refresh
     e.preventDefault();
+});
+
+// switch from list item update form to to-do list
+updateListItem2todoList.addEventListener('click', () => {
+    updateListItem.classList.toggle('visually-hidden');
+    todoList.classList.toggle('visually-hidden');
 });

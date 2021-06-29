@@ -34,15 +34,6 @@
             </div>
         </div>
 
-        <div id="authBar" class="row visually-hidden py-2">
-            <div class="col-10 col-md-4 py-2">
-                <div class="col-12 col-md py-2 d-flex justify-content-between">
-                    <button class="btn btn-primary" id="accountSettings">Account Settings</button>
-                    <button class="btn btn-outline-primary" id="logout">Log Out</button>
-                </div>
-            </div>
-        </div>
-
         <div id="signupForm" class="row visually-hidden">
             <div class="col-10 col-md-4 py-2">
                 <h4 class="text-primary text-underline">Sign Up</h4>
@@ -107,6 +98,58 @@
             </div>
         </div>
 
+        <div id="authBar" class="row visually-hidden py-2">
+            <div class="col-10 col-md-4 py-2">
+                <div class="col-12 col-md py-2 d-flex justify-content-between">
+                    <button class="btn btn-primary" id="accountSettings">Account Settings</button>
+                    <button class="btn btn-outline-primary" id="logout">Log Out</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="updateForm" class="row visually-hidden">
+            <div class="col-10 col-md-4 py-2">
+                <button id="updateForm2Dashboard" class="btn btn-outline-dark my-3">
+                    <i class="bi bi-backspace-fill"></i> Dashboard
+                </button>
+                <h4 class="text-primary text-underline">Update Profile</h4>
+                <form>
+                    <div class="my-3">
+                        <label for="updateFirstName" class="form-label">First name</label>
+                        <span id="updateFirstNameError" class="error-note"></span>
+                        <span id="updateFirstNameLengthError" class="error-note"></span>
+                        <input type="text" class="form-control" id="updateFirstName">
+                    </div>
+                    <div class="my-3">
+                        <label for="updateLastName" class="form-label">Last name</label>
+                        <span id="updateLastNameError" class="error-note"></span>
+                        <span id="updateLastNameLengthError" class="error-note"></span>
+                        <input type="text" class="form-control" id="updateLastName">
+                    </div>
+                    <div class="my-3">
+                        <label for="updateEmailAddress" class="form-label">Email address</label>
+                        <span id="updateEmailAddressError" class="error-note"></span>
+                        <span id="updateEmailAddressLengthError" class="error-note"></span>
+                        <span id="updateEmailAddressContentError" class="error-note"></span>
+                        <input type="email" class="form-control" id="updateEmailAddress">
+                    </div>
+                    <div class="my-3">
+                        <label for="updatePassword" class="form-label">Password</label>
+                        <span id="updatePasswordError" class="error-note"></span>
+                        <span id="updatePasswordLengthError" class="error-note"></span>
+                        <input type="text" class="form-control" id="updatePassword">
+                    </div>
+                    <div class="form-check my-3">
+                        <label for="updateTerms" class="form-check-label">
+                            I agree to the Terms of Use</label>
+                        <input class="form-check-input" type="checkbox" id="updateTerms">
+                        <p id="updateTermsError" class="error-note"></p>
+                    </div>
+                    <button class="btn btn-dark my-3" id="updateSubmit">Update</button>
+                </form>
+            </div>
+        </div>
+
         <div id="dashboard" class="row visually-hidden">
             <div class="col-10 col-md-4 py-2">
                 <h4 class="text-primary text-underline">Dashboard</h4>
@@ -165,50 +208,33 @@
                             <input class="form-check-input" type="checkbox" id="listItemDoneStatus">
                         </div>
                     </div>
-                    <button class="btn btn-dark my-3" id="creatListItemSubmit">Save</button>
+                    <button class="btn btn-dark my-3" id="createListItemSubmit">Save</button>
                 </form>
             </div>
         </div>
 
-        <div id="updateForm" class="row visually-hidden">
+        <div id="updateListItem" class="row visually-hidden">
             <div class="col-10 col-md-4 py-2">
-                <button id="updateForm2Dashboard" class="btn btn-outline-dark my-3">
-                    <i class="bi bi-backspace-fill"></i> Dashboard
+                <button id="updateListItem2todoList" class="btn btn-outline-dark my-3">
+                    <i class="bi bi-backspace-fill"></i> Back
                 </button>
-                <h4 class="text-primary text-underline">Update Profile</h4>
+                <h4 class="text-primary text-underline">Update
+                    "<span id="listItemNameValue"></span>"
+                </h4>
                 <form>
                     <div class="my-3">
-                        <label for="updateFirstName" class="form-label">First name</label>
-                        <span id="updateFirstNameError" class="error-note"></span>
-                        <span id="updateFirstNameLengthError" class="error-note"></span>
-                        <input type="text" class="form-control" id="updateFirstName">
+                        <label for="updateListItemName" class="form-label">Item name</label>
+                        <span id="updateListItemNameError" class="error-note"></span>
+                        <input type="text" class="form-control" id="updateListItemName">
                     </div>
                     <div class="my-3">
-                        <label for="updateLastName" class="form-label">Last name</label>
-                        <span id="updateLastNameError" class="error-note"></span>
-                        <span id="updateLastNameLengthError" class="error-note"></span>
-                        <input type="text" class="form-control" id="updateLastName">
+                        <div class="form-check">
+                            <label for="updateListItemDoneStatus" class="form-check-label">
+                                Done</label>
+                            <input class="form-check-input" type="checkbox" id="updateListItemDoneStatus">
+                        </div>
                     </div>
-                    <div class="my-3">
-                        <label for="updateEmailAddress" class="form-label">Email address</label>
-                        <span id="updateEmailAddressError" class="error-note"></span>
-                        <span id="updateEmailAddressLengthError" class="error-note"></span>
-                        <span id="updateEmailAddressContentError" class="error-note"></span>
-                        <input type="email" class="form-control" id="updateEmailAddress">
-                    </div>
-                    <div class="my-3">
-                        <label for="updatePassword" class="form-label">Password</label>
-                        <span id="updatePasswordError" class="error-note"></span>
-                        <span id="updatePasswordLengthError" class="error-note"></span>
-                        <input type="text" class="form-control" id="updatePassword">
-                    </div>
-                    <div class="form-check my-3">
-                        <label for="updateTerms" class="form-check-label">
-                            I agree to the Terms of Use</label>
-                        <input class="form-check-input" type="checkbox" id="updateTerms">
-                        <p id="updateTermsError" class="error-note"></p>
-                    </div>
-                    <button class="btn btn-dark my-3" id="updateSubmit">Update</button>
+                    <button class="btn btn-dark my-3" id="updateListItemSubmit">Save</button>
                 </form>
             </div>
         </div>
