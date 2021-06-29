@@ -3,6 +3,7 @@ const database = window.localStorage;
 
 // current user values
 let currentUserDetails;
+let oldListItemName;
 
 // views
 const baseView = document.getElementById('baseView');
@@ -14,6 +15,7 @@ const authBar = document.getElementById('authBar');
 const logout = document.getElementById('logout');
 const accountSettings = document.getElementById('accountSettings');
 const updateForm = document.getElementById('updateForm');
+const updateSubmit = document.getElementById('updateSubmit');
 const updateForm2Dashboard = document.getElementById('updateForm2Dashboard');
 const createNewList = document.getElementById('createNewList');
 const lists = document.getElementById('lists');
@@ -33,6 +35,7 @@ const todoListItems = document.getElementById('todoListItems');
 const updateListItem = document.getElementById('updateListItem');
 const listItemNameValue = document.getElementById('listItemNameValue');
 const updateListItem2todoList = document.getElementById('updateListItem2todoList');
+const updateListItemSubmit = document.getElementById('updateListItemSubmit');
 
 // empty field check
 const emptyFieldCheck = (inputElement, inputElementError, errorTextName) => {
@@ -412,8 +415,6 @@ updateForm2Dashboard.addEventListener('click', () => {
     dashboard.classList.toggle('visually-hidden');
 })
 
-const updateSubmit = document.getElementById('updateSubmit');
-
 updateSubmit.addEventListener('click', (e) => {
     // input DOM extraction
     const updateFirstName = document.getElementById('updateFirstName');
@@ -595,6 +596,9 @@ const dashboardContent = (userDetails) => {
         }
 
         lists.appendChild(listings);
+    } else {
+        // present empty space if no lists
+        lists.innerHTML = '';
     }
 }
 
@@ -672,6 +676,10 @@ createListItemSubmit.addEventListener('click', (e) => {
         // notify of to-do list creation
         alert('To-do list item added');
 
+        // rest list values
+        listItemName.value = '';
+        listItemDoneStatus.checked = false;
+
         // switch to to-do list
         switchToList(currentUserDetails);
     }
@@ -680,9 +688,25 @@ createListItemSubmit.addEventListener('click', (e) => {
     e.preventDefault();
 });
 
+const listItemInformation = (innerItemValues) => {
+    // fill update list item form with values
+    const updateListItemName = document.getElementById('updateListItemName');
+    const updateListItemDoneStatus = document.getElementById('updateListItemDoneStatus');
+    oldListItemName = innerItemValues['item'];
+    console.log(`Old list item name: ${oldListItemName}`);
+
+    updateListItemName.value = innerItemValues['item'];
+    updateListItemDoneStatus.value = innerItemValues['done'];
+}
+
 const switchToList = (userDetails) => {
     if (!newListItem.classList.contains('visually-hidden')) {
         newListItem.classList.toggle('visually-hidden');
+        todoList.classList.toggle('visually-hidden');
+    }
+
+    if (!updateListItem.classList.contains('visually-hidden')) {
+        updateListItem.classList.toggle('visually-hidden');
         todoList.classList.toggle('visually-hidden');
     }
 
@@ -730,8 +754,9 @@ const switchToList = (userDetails) => {
                             todoList.classList.toggle('visually-hidden');
                             updateListItem.classList.toggle('visually-hidden');
 
-                            // place list item name in form
+                            // place list values in form
                             listItemNameValue.innerText = listElement['name'];
+                            listItemInformation(innerItem);
                         }
                     });
 
@@ -749,4 +774,90 @@ updateListItem2todoList.addEventListener('click', () => {
 
     // reset list item name value
     listItemNameValue.innerText = '';
+
+    // reset old item name value
+    oldListItemName = '';
 });
+
+const itemIndex = (itemArray, itemName) => {
+    for (let itemObj of itemArray) {
+        if (itemObj['item'] === itemName) {
+            return itemArray.indexOf(itemObj);
+        }
+    }
+}
+
+// update form for specific to-do list item
+updateListItemSubmit.addEventListener('click', (e) => {
+    // input DOM extraction
+    const updateListItemName = document.getElementById('updateListItemName');
+    const updateListItemNameError = document.getElementById('updateListItemNameError');
+    const updateListItemDoneStatus = document.getElementById('updateListItemDoneStatus');
+
+    // form validation
+    generalValidation(updateListItemName.value, updateListItemNameError, 'List item can not be empty');
+
+    const inputValid = fullyValidForm(
+        generalValidation(updateListItemName.value, updateListItemNameError, 'List item can not be empty')
+    );
+
+    if (inputValid) {
+        // save list item values to new object
+        let newListItemValues = {};
+        newListItemValues['item'] = updateListItemName.value;
+        newListItemValues['done'] = updateListItemDoneStatus.checked;
+
+        // update database list with new name
+        let dbState = JSON.parse(
+            database.getItem(`${currentUserDetails['userEmail']}`)
+        );
+
+        let userLists = dbState['lists'];
+
+        for (let todo of userLists) {
+            // find specific to-do list from user database values
+            if (todo['name'] === listItemNameValue.innerText) {
+                const todoItems = todo['items'];
+
+                for (let el of todoItems) {
+                    if (el['item'] === oldListItemName) {
+                        console.log(el['item']);
+                        // const todoListItemIndex = itemIndex(el, oldListItemName);
+                        // console.log('To-do list item: ' + todoListItemIndex);
+                        // todoItems.splice(todoListItemIndex, 1, newListValues);
+                        // console.log('Updated list values for DB: ' + JSON.stringify(todo));
+                    }
+                }
+
+                // update current user details
+                // for (let userInfo of currentUserDetails['userLists']) {
+                //     if (userInfo['name'] === listItemNameValue.innerText) {
+                //         const currentUserItems = userInfo['items'];
+
+                //         for (let el of currentUserItems) {
+                //             if (el['item'] === oldListItemName) {
+                //                 const todoListItemIndex = itemIndex(el, oldListItemName);
+                //                 currentUserItems.splice(todoListItemIndex, 1, newListValues);
+                //                 console.log('Updated user lists in state: '
+                //                     + JSON.stringify(currentUserDetails['userLists']));
+                //             }
+                //         }
+                //     }
+                // }
+
+                // database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
+                // console.log('Saved user details: '
+                //     + JSON.stringify(dbState));
+            }
+        }
+
+        // // notify of to-do list creation
+        // alert('To-do list item updated');
+
+        // // switch to to-do list
+        // switchToList(currentUserDetails);
+    }
+
+    // prevent page refresh
+    e.preventDefault();
+})
