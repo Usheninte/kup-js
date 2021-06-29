@@ -684,6 +684,9 @@ todoList2Dashboard.addEventListener('click', () => {
 
     // reset to-do list name
     todoListName.innerText = '';
+
+    // update dashboard content
+    dashboardContent(currentUserDetails);
 });
 
 // switch to new list item form
