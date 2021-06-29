@@ -627,11 +627,23 @@ const switchToList = (userDetails) => {
                 for (let innerItem of listElement['items']) {
                     const listInnerBlock = document.createElement('div');
 
+                    const listInnerIcon = document.createElement('i');
+                    listInnerIcon.className = 'bi bi-pencil-square';
+
+                    const listInnerText = document.createElement('span');
+                    listInnerText.innerText = ` ${innerItem['item']}`;
+
                     const listInnerItem = document.createElement('button');
                     listInnerItem.id = `listInnerItem-${id}`;
-                    listInnerItem.className = 'btn btn-outline-dark my-1 list-button';
-                    listInnerItem.innerText = `${innerItem['item']}`;
 
+                    if (innerItem['done']) {
+                        listInnerItem.className = 'btn btn-outline-success my-1 list-button';
+                    } else {
+                        listInnerItem.className = 'btn btn-outline-danger my-1 list-button';
+                    }
+
+                    listInnerItem.appendChild(listInnerIcon);
+                    listInnerItem.appendChild(listInnerText);
                     listInnerBlock.appendChild(listInnerItem);
                     todoListItems.appendChild(listInnerBlock);
                     id++;
