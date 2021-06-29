@@ -251,8 +251,6 @@ signupSubmit.addEventListener('click', (e) => {
             loginValidation(userInfo, userInfo['password'], loginAuthenticationError,
                 'User with password entered does not exist');
         }
-
-        console.log(userInfo);
     }
 
     // block page refresh
@@ -538,7 +536,6 @@ createListSubmit.addEventListener('click', (e) => {
         );
         dbState['lists'].push(newListValues);
         currentUserDetails['userLists'].push(newListValues);
-        console.log('Updated user lists: ' + JSON.stringify(currentUserDetails['userLists']));
         database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
 
         // notify of to-do list creation
@@ -557,12 +554,54 @@ createListSubmit.addEventListener('click', (e) => {
 updateListName.addEventListener('click', () => {
     todoList.classList.toggle('visually-hidden');
     updateList.classList.toggle('visually-hidden');
+
+    // fill in list name with present value
+    updateListName.value = todoListName.innerText;
 });
 
 // switch from to-do list to dashboard
 updateList2todoList.addEventListener('click', () => {
     updateList.classList.toggle('visually-hidden');
     todoList.classList.toggle('visually-hidden');
+});
+
+// behaviour on create list submit behaviour
+updateListSubmit.addEventListener('click', (e) => {
+    // form validation
+    const updateListName = document.getElementById('updateListName');
+    const updateListNameError = document.getElementById('updateListNameError');
+
+    generalValidation(updateListName.value, updateListNameError, 'List name can not be empty');
+
+    const inputValid = fullyValidForm(
+        generalValidation(updateListName.value, updateListNameError, 'List name can not be empty')
+    );
+
+    // if (inputValid) {
+    //     // save list name to new object
+    //     let newListValues = {};
+    //     newListValues['name'] = updateListName.value;
+
+    //     // update database list with new name
+    //     let dbState = JSON.parse(
+    //         database.getItem(`${currentUserDetails['userEmail']}`)
+    //     );
+
+    //     dbState['lists'].push(newListValues);
+    //     currentUserDetails['userLists'].push(newListValues);
+    //     console.log('Updated user lists: ' + JSON.stringify(currentUserDetails['userLists']));
+    //     database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
+
+    //     // notify of to-do list creation
+    //     alert('To-do list created');
+
+    //     listName.value = '';
+
+    //     // // switch to dashboard
+    //     switchToDashboard(currentUserDetails['userEmail'], newList);
+    // }
+
+    e.preventDefault();
 });
 
 // dashboard view
@@ -600,10 +639,6 @@ const dashboardContent = (userDetails) => {
 
             // behaviour on to-do list button click
             listItem.addEventListener('click', () => {
-                console.log(listItem);
-                console.log(`List item: ${JSON.stringify(
-                    extractListItem(listItem, userDetails)
-                )}`);
                 // extract list item information
                 const listItemInfo = extractListItem(listItem, userDetails);
 
@@ -679,23 +714,18 @@ createListItemSubmit.addEventListener('click', (e) => {
         for (let todo of userLists) {
             // find specific to-do list from user database values
             if (todo['name'] === todoListName.innerText) {
-                console.log('User specific list values: ' + JSON.stringify(todo));
-
                 // update current user details
                 for (let userInfo of currentUserDetails['userLists']) {
                     if (userInfo['name'] === todoListName.innerText) {
                         userInfo['items'].push(newListItemValues);
-                        console.log('Updated user lists: '
-                            + JSON.stringify(currentUserDetails['userLists']));
                     }
                 }
 
                 const specificListItems = todo['items'];
                 specificListItems.push(newListItemValues);
 
-                database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
-                console.log('Saved user details: '
-                    + JSON.stringify(dbState));
+                database.setItem(`${currentUserDetails['userEmail']}`,
+                    JSON.stringify(dbState));
             }
         }
 
