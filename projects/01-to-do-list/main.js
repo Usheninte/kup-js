@@ -345,6 +345,10 @@ logout.addEventListener('click', () => {
         newListItem.classList.toggle('visually-hidden');
     }
 
+    if (!updateListItem.classList.contains('visually-hidden')) {
+        updateListItem.classList.toggle('visually-hidden');
+    }
+
     // clear sign up values
     const regFirstName = document.getElementById('registerFirstName');
     const regLastName = document.getElementById('registerLastName');
@@ -392,6 +396,12 @@ accountSettings.addEventListener('click', () => {
     if (!newListItem.classList.contains('visually-hidden')
         && dashboard.classList.contains('visually-hidden')) {
         newListItem.classList.toggle('visually-hidden');
+        updateForm.classList.toggle('visually-hidden');
+    }
+
+    if (!updateListItem.classList.contains('visually-hidden')
+        && dashboard.classList.contains('visually-hidden')) {
+        updateListItem.classList.toggle('visually-hidden');
         updateForm.classList.toggle('visually-hidden');
     }
 });
@@ -609,67 +619,6 @@ newListItem2todoList.addEventListener('click', () => {
     todoList.classList.toggle('visually-hidden');
 });
 
-const switchToList = (userDetails) => {
-    if (!newListItem.classList.contains('visually-hidden')) {
-        newListItem.classList.toggle('visually-hidden');
-        todoList.classList.toggle('visually-hidden');
-    }
-
-    if (!dashboard.classList.contains('visually-hidden')) {
-        dashboard.classList.toggle('visually-hidden');
-        todoList.classList.toggle('visually-hidden');
-    }
-
-    if (userDetails['userLists'].length > 0) {
-        for (let listElement of userDetails['userLists']) {
-            if (listElement['name'] === todoListName.innerText) {
-                let id = 0;
-
-                todoListItems.innerHTML = '';
-
-                for (let innerItem of listElement['items']) {
-                    const listInnerBlock = document.createElement('div');
-
-                    const listInnerIcon = document.createElement('i');
-                    listInnerIcon.className = 'bi bi-pencil-square';
-
-                    const listInnerText = document.createElement('span');
-                    listInnerText.innerText = ` ${innerItem['item']}`;
-
-                    const listInnerItem = document.createElement('button');
-                    listInnerItem.id = `listInnerItem-${id}`;
-
-                    if (innerItem['done']) {
-                        listInnerItem.className = 'btn btn-outline-success my-1 list-button';
-                    } else {
-                        listInnerItem.className = 'btn btn-outline-danger my-1 list-button';
-                    }
-
-                    listInnerItem.appendChild(listInnerIcon);
-                    listInnerItem.appendChild(listInnerText);
-                    listInnerBlock.appendChild(listInnerItem);
-                    todoListItems.appendChild(listInnerBlock);
-
-                    // behaviour on to-do list button click
-                    listInnerItem.addEventListener('click', () => {
-                        if (innerItem['item'] === listInnerText.innerText.trim()) {
-                            console.log(`To-do list item: ${JSON.stringify(innerItem)}`);
-
-                            // switch to independent view based of extracted list inner item
-                            todoList.classList.toggle('visually-hidden');
-                            updateListItem.classList.toggle('visually-hidden');
-
-
-                        }
-                    });
-
-                    id++;
-                }
-            }
-        }
-    }
-}
-
 createListItemSubmit.addEventListener('click', (e) => {
     // input DOM extraction
     const listItemName = document.getElementById('listItemName');
@@ -731,8 +680,73 @@ createListItemSubmit.addEventListener('click', (e) => {
     e.preventDefault();
 });
 
+const switchToList = (userDetails) => {
+    if (!newListItem.classList.contains('visually-hidden')) {
+        newListItem.classList.toggle('visually-hidden');
+        todoList.classList.toggle('visually-hidden');
+    }
+
+    if (!dashboard.classList.contains('visually-hidden')) {
+        dashboard.classList.toggle('visually-hidden');
+        todoList.classList.toggle('visually-hidden');
+    }
+
+    if (userDetails['userLists'].length > 0) {
+        for (let listElement of userDetails['userLists']) {
+            if (listElement['name'] === todoListName.innerText) {
+                let id = 0;
+
+                todoListItems.innerHTML = '';
+
+                for (let innerItem of listElement['items']) {
+                    const listInnerBlock = document.createElement('div');
+
+                    const listInnerIcon = document.createElement('i');
+                    listInnerIcon.className = 'bi bi-pencil-square';
+
+                    const listInnerText = document.createElement('span');
+                    listInnerText.innerText = ` ${innerItem['item']}`;
+
+                    const listInnerItem = document.createElement('button');
+                    listInnerItem.id = `listInnerItem-${id}`;
+
+                    if (innerItem['done']) {
+                        listInnerItem.className = 'btn btn-outline-success my-1 list-button';
+                    } else {
+                        listInnerItem.className = 'btn btn-outline-danger my-1 list-button';
+                    }
+
+                    listInnerItem.appendChild(listInnerIcon);
+                    listInnerItem.appendChild(listInnerText);
+                    listInnerBlock.appendChild(listInnerItem);
+                    todoListItems.appendChild(listInnerBlock);
+
+                    // behaviour on to-do list button click
+                    listInnerItem.addEventListener('click', () => {
+                        if (innerItem['item'] === listInnerText.innerText.trim()) {
+                            console.log(`To-do list item: ${JSON.stringify(innerItem)}`);
+
+                            // switch to independent view based of extracted list inner item
+                            todoList.classList.toggle('visually-hidden');
+                            updateListItem.classList.toggle('visually-hidden');
+
+                            // place list item name in form
+                            listItemNameValue.innerText = listElement['name'];
+                        }
+                    });
+
+                    id++;
+                }
+            }
+        }
+    }
+}
+
 // switch from list item update form to to-do list
 updateListItem2todoList.addEventListener('click', () => {
     updateListItem.classList.toggle('visually-hidden');
     todoList.classList.toggle('visually-hidden');
+
+    // reset list item name value
+    listItemNameValue.innerText = '';
 });
