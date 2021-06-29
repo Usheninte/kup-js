@@ -4,6 +4,7 @@ const database = window.localStorage;
 // current user values
 let currentUserDetails;
 let oldListItemName;
+let oldListName;
 
 // views
 const baseView = document.getElementById('baseView');
@@ -23,7 +24,7 @@ const listings = document.getElementById('listings');
 const newList = document.getElementById('newList');
 const newList2Dashboard = document.getElementById('newList2Dashboard');
 const createListSubmit = document.getElementById('createListSubmit');
-const todoListButton = document.getElementsByClassName('list-button');
+const todoListIdentifier = document.getElementById('todoListIdentifier');
 const todoList = document.getElementById('todoList');
 const todoListName = document.getElementById('todoListName');
 const todoList2Dashboard = document.getElementById('todoList2Dashboard');
@@ -31,9 +32,9 @@ const createNewListItem = document.getElementById('createNewListItem');
 const newListItem = document.getElementById('newListItem');
 const newListItem2todoList = document.getElementById('newListItem2todoList');
 const createListItemSubmit = document.getElementById('createListItemSubmit');
-const updateListName = document.getElementById('updateListName');
 const updateList = document.getElementById('updateList');
 const updateList2todoList = document.getElementById('updateList2todoList');
+const updateListName = document.getElementById('updateListName');
 const updateListSubmit = document.getElementById('updateListSubmit');
 const todoListItems = document.getElementById('todoListItems');
 const updateListItem = document.getElementById('updateListItem');
@@ -551,7 +552,7 @@ createListSubmit.addEventListener('click', (e) => {
 });
 
 // switch to new list item form
-updateListName.addEventListener('click', () => {
+todoListIdentifier.addEventListener('click', () => {
     todoList.classList.toggle('visually-hidden');
     updateList.classList.toggle('visually-hidden');
 
@@ -565,10 +566,19 @@ updateList2todoList.addEventListener('click', () => {
     todoList.classList.toggle('visually-hidden');
 });
 
+const listNameUpdate = (listInformation, oldNameValue, newNameValue) => {
+    for (let listElement of listInformation) {
+        // if list element name is the same as selected list
+        if (listElement['name'] === oldNameValue) {
+            // update element name with new value
+            listElement['name'] = newNameValue;
+        }
+    }
+}
+
 // behaviour on create list submit behaviour
 updateListSubmit.addEventListener('click', (e) => {
     // form validation
-    const updateListName = document.getElementById('updateListName');
     const updateListNameError = document.getElementById('updateListNameError');
 
     generalValidation(updateListName.value, updateListNameError, 'List name can not be empty');
@@ -577,29 +587,33 @@ updateListSubmit.addEventListener('click', (e) => {
         generalValidation(updateListName.value, updateListNameError, 'List name can not be empty')
     );
 
-    // if (inputValid) {
-    //     // save list name to new object
-    //     let newListValues = {};
-    //     newListValues['name'] = updateListName.value;
+    if (inputValid) {
+        // save list name to new object
+        let newListName = updateListName.value;
 
-    //     // update database list with new name
-    //     let dbState = JSON.parse(
-    //         database.getItem(`${currentUserDetails['userEmail']}`)
-    //     );
+        // update to-do list name for display
+        todoListName.innerText = newListName;
 
-    //     dbState['lists'].push(newListValues);
-    //     currentUserDetails['userLists'].push(newListValues);
-    //     console.log('Updated user lists: ' + JSON.stringify(currentUserDetails['userLists']));
-    //     database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
+        // update database list with new name
+        let dbState = JSON.parse(
+            database.getItem(`${currentUserDetails['userEmail']}`)
+        );
 
-    //     // notify of to-do list creation
-    //     alert('To-do list created');
+        // update list name
+        listNameUpdate(dbState['lists'], oldListName, newListName);
+        listNameUpdate(currentUserDetails['userLists'], oldListName, newListName);
+        console.log('Updated user lists: ' + JSON.stringify(currentUserDetails['userLists']));
+        database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
 
-    //     listName.value = '';
+        // notify of to-do list creation
+        alert('To-do list name updated');
 
-    //     // // switch to dashboard
-    //     switchToDashboard(currentUserDetails['userEmail'], newList);
-    // }
+        // reset list name value in update form
+        updateListName.value = '';
+
+        // switch to dashboard
+        switchToList(currentUserDetails);
+    }
 
     e.preventDefault();
 });
@@ -631,7 +645,7 @@ const dashboardContent = (userDetails) => {
 
             const listItem = document.createElement('button');
             listItem.id = `listItem-${id}`;
-            listItem.className = 'btn btn-outline-dark my-1 list-button';
+            listItem.className = 'btn btn-outline-dark my-1';
 
             listItem.appendChild(listText);
             listItem.appendChild(listIcon);
@@ -755,6 +769,11 @@ const listItemInformation = (innerItemValues) => {
 }
 
 const switchToList = (userDetails) => {
+    if (!updateList.classList.contains('visually-hidden')) {
+        updateList.classList.toggle('visually-hidden');
+        todoList.classList.toggle('visually-hidden');
+    }
+
     if (!newListItem.classList.contains('visually-hidden')) {
         newListItem.classList.toggle('visually-hidden');
         todoList.classList.toggle('visually-hidden');
@@ -773,6 +792,8 @@ const switchToList = (userDetails) => {
     if (userDetails['userLists'].length > 0) {
         for (let listElement of userDetails['userLists']) {
             if (listElement['name'] === todoListName.innerText) {
+                oldListName = todoListName.innerText;
+
                 let id = 0;
 
                 todoListItems.innerHTML = '';
