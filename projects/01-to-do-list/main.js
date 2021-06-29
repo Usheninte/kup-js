@@ -31,6 +31,10 @@ const createNewListItem = document.getElementById('createNewListItem');
 const newListItem = document.getElementById('newListItem');
 const newListItem2todoList = document.getElementById('newListItem2todoList');
 const createListItemSubmit = document.getElementById('createListItemSubmit');
+const updateListName = document.getElementById('updateListName');
+const updateList = document.getElementById('updateList');
+const updateList2todoList = document.getElementById('updateList2todoList');
+const updateListSubmit = document.getElementById('updateListSubmit');
 const todoListItems = document.getElementById('todoListItems');
 const updateListItem = document.getElementById('updateListItem');
 const listItemNameValue = document.getElementById('listItemNameValue');
@@ -340,6 +344,10 @@ logout.addEventListener('click', () => {
         newList.classList.toggle('visually-hidden');
     }
 
+    if (!updateList.classList.contains('visually-hidden')) {
+        updateList.classList.toggle('visually-hidden');
+    }
+
     if (!todoList.classList.contains('visually-hidden')) {
         todoList.classList.toggle('visually-hidden');
     }
@@ -537,6 +545,18 @@ createListSubmit.addEventListener('click', (e) => {
     }
 
     e.preventDefault();
+});
+
+// switch to new list item form
+updateListName.addEventListener('click', () => {
+    todoList.classList.toggle('visually-hidden');
+    updateList.classList.toggle('visually-hidden');
+});
+
+// switch from to-do list to dashboard
+updateList2todoList.addEventListener('click', () => {
+    updateList.classList.toggle('visually-hidden');
+    todoList.classList.toggle('visually-hidden');
 });
 
 // dashboard view
@@ -747,8 +767,6 @@ const switchToList = (userDetails) => {
                     // behaviour on to-do list button click
                     listInnerItem.addEventListener('click', () => {
                         if (innerItem['item'] === listInnerText.innerText.trim()) {
-                            console.log(`To-do list item: ${JSON.stringify(innerItem)}`);
-
                             // switch to independent view based of extracted list inner item
                             todoList.classList.toggle('visually-hidden');
                             updateListItem.classList.toggle('visually-hidden');

@@ -161,6 +161,20 @@
             </div>
         </div>
 
+        <div id="todoList" class="row visually-hidden">
+            <div class="col-10 col-md-4 py-2">
+                <button id="todoList2Dashboard" class="btn btn-outline-dark my-3">
+                    <i class="bi bi-backspace-fill"></i> Back
+                </button>
+                <div id="updateListName" class="my-3 list-name">
+                    <i class="bi bi-pencil-square"></i>
+                    <strong><span id="todoListName"></span></strong>
+                </div>
+                <button id="createNewListItem" class="btn btn-dark my-1">Add New Item</button>
+                <div id="todoListItems" class="my-3"></div>
+            </div>
+        </div>
+
         <div id="newList" class="row visually-hidden">
             <div class="col-10 col-md-4 py-2">
                 <button id="newList2Dashboard" class="btn btn-outline-dark my-3">
@@ -178,14 +192,20 @@
             </div>
         </div>
 
-        <div id="todoList" class="row visually-hidden">
+        <div id="updateList" class="row visually-hidden">
             <div class="col-10 col-md-4 py-2">
-                <button id="todoList2Dashboard" class="btn btn-outline-dark my-3">
+                <button id="updateList2todoList" class="btn btn-outline-dark my-3">
                     <i class="bi bi-backspace-fill"></i> Back
                 </button>
-                <h4 id="todoListName" class="my-3"></h4>
-                <button id="createNewListItem" class="btn btn-dark my-1">Add New Item</button>
-                <div id="todoListItems" class="my-3"></div>
+                <h4 class="text-primary text-underline">Update New to-do List</h4>
+                <form>
+                    <div class="my-3">
+                        <label for="updateListName" class="form-label">To-do list name</label>
+                        <span id="updateListNameError" class="error-note"></span>
+                        <input type="text" class="form-control" id="listName">
+                    </div>
+                    <button class="btn btn-dark my-3" id="updateListSubmit">Save</button>
+                </form>
             </div>
         </div>
 
@@ -238,13 +258,6 @@
                 </form>
             </div>
         </div>
-
-        <!-- <div id="" class="row visually-hidden">
-            <div class="col-10 col-md-4 py-2">
-                <h4 class="text-primary text-underline"></h4>
-                <div></div>
-            </div>
-        </div> -->
     </div>
 
     <!-- Custom behaviour -->
