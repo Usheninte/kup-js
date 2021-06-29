@@ -693,10 +693,9 @@ const listItemInformation = (innerItemValues) => {
     const updateListItemName = document.getElementById('updateListItemName');
     const updateListItemDoneStatus = document.getElementById('updateListItemDoneStatus');
     oldListItemName = innerItemValues['item'];
-    console.log(`Old list item name: ${oldListItemName}`);
 
     updateListItemName.value = innerItemValues['item'];
-    updateListItemDoneStatus.value = innerItemValues['done'];
+    updateListItemDoneStatus.checked = innerItemValues['done'];
 }
 
 const switchToList = (userDetails) => {
@@ -780,11 +779,13 @@ updateListItem2todoList.addEventListener('click', () => {
 });
 
 const itemIndex = (itemArray, itemName) => {
+    let itemIndexNumber;
     for (let itemObj of itemArray) {
         if (itemObj['item'] === itemName) {
-            return itemArray.indexOf(itemObj);
+            itemIndexNumber = itemArray.indexOf(itemObj);
         }
     }
+    return itemIndexNumber;
 }
 
 // update form for specific to-do list item
@@ -817,45 +818,30 @@ updateListItemSubmit.addEventListener('click', (e) => {
         for (let todo of userLists) {
             // find specific to-do list from user database values
             if (todo['name'] === listItemNameValue.innerText) {
-                const todoItems = todo['items'];
+                let todoItems = todo['items'];
 
-                for (let el of todoItems) {
-                    if (el['item'] === oldListItemName) {
-                        console.log(el['item']);
-                        // const todoListItemIndex = itemIndex(el, oldListItemName);
-                        // console.log('To-do list item: ' + todoListItemIndex);
-                        // todoItems.splice(todoListItemIndex, 1, newListValues);
-                        // console.log('Updated list values for DB: ' + JSON.stringify(todo));
+                const todoListItemIndex = itemIndex(todoItems, oldListItemName);
+                todoItems.splice(todoListItemIndex, 1, newListItemValues);
+
+                // update current user details
+                for (let userInfo of currentUserDetails['userLists']) {
+                    if (userInfo['name'] === listItemNameValue.innerText) {
+                        let currentUserItems = userInfo['items'];
+
+                        const currentTodoListItemIndex = itemIndex(currentUserItems, oldListItemName);
+                        currentUserItems.splice(currentTodoListItemIndex, 1, newListItemValues);
                     }
                 }
 
-                // update current user details
-                // for (let userInfo of currentUserDetails['userLists']) {
-                //     if (userInfo['name'] === listItemNameValue.innerText) {
-                //         const currentUserItems = userInfo['items'];
-
-                //         for (let el of currentUserItems) {
-                //             if (el['item'] === oldListItemName) {
-                //                 const todoListItemIndex = itemIndex(el, oldListItemName);
-                //                 currentUserItems.splice(todoListItemIndex, 1, newListValues);
-                //                 console.log('Updated user lists in state: '
-                //                     + JSON.stringify(currentUserDetails['userLists']));
-                //             }
-                //         }
-                //     }
-                // }
-
-                // database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
-                // console.log('Saved user details: '
-                //     + JSON.stringify(dbState));
+                database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
             }
         }
 
-        // // notify of to-do list creation
-        // alert('To-do list item updated');
+        // notify of to-do list creation
+        alert('To-do list item updated');
 
-        // // switch to to-do list
-        // switchToList(currentUserDetails);
+        // switch to to-do list
+        switchToList(currentUserDetails);
     }
 
     // prevent page refresh
