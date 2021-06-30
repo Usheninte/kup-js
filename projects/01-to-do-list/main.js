@@ -81,6 +81,31 @@ const generalValidation = (inputValue, inputElementError, errorText) => {
     }
 }
 
+// unique name validation
+const uniqueNameValidation = (nameValue, searchListContext, inputElementError, errorText) => {
+    let verdict = [];
+
+    for (let listElement of searchListContext) {
+        // convert values to lowercase for more precise matching
+        if (listElement['name'].toLowerCase() === nameValue.toLowerCase()) {
+            verdict.push(false);
+        } else {
+            verdict.push(true);
+        }
+    }
+
+    // check that name value is unique
+    const nameUnique = verdict.every((status) => status === true);
+
+    if (!nameUnique) {
+        inputElementError.innerText = errorText;
+        setTimeout(() => inputElementError.innerText = '', 3000);
+        return false;
+    } else {
+        return true;
+    }
+}
+
 // full check of form values
 const fullyValidForm = (...args) => {
     let validityBucket = [];
