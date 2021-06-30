@@ -543,11 +543,16 @@ createListSubmit.addEventListener('click', (e) => {
     // form validation
     const listName = document.getElementById('listName');
     const listNameError = document.getElementById('listNameError');
+    const listNameUniqueError = document.getElementById('listNameUniqueError');
 
     generalValidation(listName.value, listNameError, 'List name can not be empty');
+    uniqueNameValidation(listName.value, currentUserDetails['userLists'],
+        listNameUniqueError, 'List with name entered already exists');
 
     const inputValid = fullyValidForm(
-        generalValidation(listName.value, listNameError, 'List name can not be empty')
+        generalValidation(listName.value, listNameError, 'List name can not be empty'),
+        uniqueNameValidation(listName.value, currentUserDetails['userLists'],
+            listNameUniqueError, 'List with name entered already exists')
     );
 
     if (inputValid) {
@@ -605,11 +610,16 @@ const listNameUpdate = (listInformation, oldNameValue, newNameValue) => {
 updateListSubmit.addEventListener('click', (e) => {
     // form validation
     const updateListNameError = document.getElementById('updateListNameError');
+    const updateListNameUniqueError = document.getElementById('updateListNameUniqueError');
 
     generalValidation(updateListName.value, updateListNameError, 'List name can not be empty');
+    uniqueNameValidation(updateListName.value, currentUserDetails['userLists'],
+        updateListNameUniqueError, 'List with name entered already exists');
 
     const inputValid = fullyValidForm(
-        generalValidation(updateListName.value, updateListNameError, 'List name can not be empty')
+        generalValidation(updateListName.value, updateListNameError, 'List name can not be empty'),
+        uniqueNameValidation(updateListName.value, currentUserDetails['userLists'],
+            updateListNameUniqueError, 'List with name entered already exists')
     );
 
     if (inputValid) {
