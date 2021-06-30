@@ -637,7 +637,6 @@ updateListSubmit.addEventListener('click', (e) => {
         // update list name
         listNameUpdate(dbState['lists'], oldListName, newListName);
         listNameUpdate(currentUserDetails['userLists'], oldListName, newListName);
-        console.log('Updated user lists: ' + JSON.stringify(currentUserDetails['userLists']));
         database.setItem(`${currentUserDetails['userEmail']}`, JSON.stringify(dbState));
 
         // notify of to-do list creation
