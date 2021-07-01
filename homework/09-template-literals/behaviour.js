@@ -1,5 +1,4 @@
 // template text content
-
 const templateContent = {
     'appTitle': 'To-do List App',
     'buttonText': {
@@ -36,6 +35,22 @@ const templateContent = {
         }
     }
 }
+
+// head tag template
+const headContent = `
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <!-- Custom styling -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Bootstrap CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+`;
 
 // body tag contents
 const titleBarDiv = `
@@ -383,10 +398,13 @@ const bodyContentTemplates = [titleBarDiv, baseViewDiv, signupFormDiv, loginForm
     newListItemDiv, updateListItemDiv
 ];
 
-const bodyFill = (templatesArray) => {
+const htmlFill = (headTemplate, bodyTemplates) => {
+    document.querySelector('head')
+        .insertAdjacentHTML('afterbegin', headTemplate)
+
     const innerBodyDiv = `
         <div class="container-fluid mx-2 my-2">
-            ${templatesArray.map((template) => template).join("")}
+            ${bodyTemplates.map((template) => template).join("")}
         </div>
     `;
 
@@ -396,7 +414,7 @@ const bodyFill = (templatesArray) => {
 
 window.addEventListener('load', (e) => {
     console.log('Page loaded!');
-    bodyFill(bodyContentTemplates);
+    htmlFill(headContent, bodyContentTemplates);
 
     // local storage as database
     const database = window.localStorage;
