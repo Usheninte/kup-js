@@ -278,15 +278,14 @@ const bodyContentTemplates = [titleBarDiv, baseViewDiv, signupFormDiv, loginForm
     newListItemDiv, updateListItemDiv, behaviourScript];
 
 const bodyFill = (templatesArray) => {
-    const bodyTag = document.getElementById('bodyContent');
-
     const innerBodyDiv = `
         <div class="container-fluid mx-2 my-2">
             ${templatesArray.map((template) => template).join("")}
         </div>
     `;
 
-    bodyTag.innerHTML = innerBodyDiv;
+    document.querySelector('body')
+        .insertAdjacentHTML('afterbegin', innerBodyDiv);
 }
 
 window.addEventListener('load', (e) => {
