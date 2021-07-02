@@ -1,0 +1,1 @@
+// # Differences between destructuring arrays and objects
