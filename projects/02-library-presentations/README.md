@@ -44,6 +44,8 @@ To render this to the DOM via React, the following snippet is needed:
 ReactDOM.render(<ClassComponent />, document.getElementById('react-app'));
 ```
 
+---
+
 For this code to be displayed in the browser, a simple HTML implementation is needed:
 
 ```html
