@@ -1,15 +1,19 @@
 const reverseJsonArray = (jsonArray) => {
-    console.log('JSON Array: ' + jsonArray);
-    const originalArray = JSON.parse(jsonArray);
-    let reversedArray = [];
+    if (Object.prototype.toString.call(JSON.parse(jsonArray)) !== '[object Array]') {
+        return false;
+    } else {
+        const originalArray = JSON.parse(jsonArray);
 
-    for (let i = 1; i <= originalArray.length; i++) {
-        reversedArray.push(originalArray[originalArray.length - i]);
+        let reversedArray = [];
+
+        for (let i = 1; i <= originalArray.length; i++) {
+            reversedArray.push(originalArray[originalArray.length - i]);
+        }
+
+        return JSON.stringify(reversedArray);
     }
-
-    const stringfiedArray = JSON.stringify(reversedArray);
-
-    console.log('Reversed JSON Array: ' + stringfiedArray);
 }
 
-reverseJsonArray('["a","b","c"]');
+console.log(
+    reverseJsonArray('["a","b","c","d","e","f"]')
+);
