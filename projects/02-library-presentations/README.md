@@ -93,7 +93,7 @@ const BenefitsForMe = (props) => {
 
 ---
 
-Incorporated into the exist `React.js` file, this is as follows:
+Incorporated into the existing `React.js` file, this is as follows:
 
 ```js
 class ClassComponent extends React.Component {
@@ -116,3 +116,4 @@ class ClassComponent extends React.Component {
 ```
 
 ---
+
