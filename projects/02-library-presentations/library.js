@@ -15,7 +15,10 @@ class ClassComponent extends React.Component {
         return (
             <div>
                 <h1>Hello React.js</h1>
-                <BenefitsForMe benefits={['Popular', 'Modern structure', 'Mobile with React Native']} />
+                <BenefitsForMe
+                    benefits={['Popular',
+                        'Modern structure',
+                        'Mobile with React Native']} />
             </div>
         );
     }
