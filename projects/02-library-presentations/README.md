@@ -28,7 +28,7 @@ React can be added to a website using a `script` tag. It can also be used via th
 
 ## Creating a React Component
 
-The syntax for creating a class-based React component is as follows:
+The syntax for creating a class-based React component is as seen below. Equally important is knowing how to render this to the DOM via React. This is shown too:
 
 ```js
 'use-strict';
@@ -46,11 +46,7 @@ class ClassComponent extends React.Component {
         );
     }
 }
-```
 
-To render this to the DOM via React, the following snippet is needed:
-
-```js
 ReactDOM.render(<ClassComponent />, document.getElementById('react-app'));
 ```
 
@@ -158,20 +154,39 @@ This syntax above works for both stateless functional components and ES6 class-b
 State is an important concept in React applications. This is normally defined within the constructor in ES6 class-based components. The way to update state is via `this.setState()`. Here the keys are the properties of your assigned state and the values are state data to be updated. A change in state is typically triggered by a button (or internally an event change). Using a button that checks for a click event, this is as follows:
 
 ```js
-constructor(props) {
-    super(props);
-    this.state = {
-    location: 'Lagos, Nigeria'
+class MyComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        location: 'Lagos, Nigeria'
+        }
+        // bind lets you refer explicitly to the function in question
+        this.handleClick = this.handleClick.bind(this)
     }
-    // bind lets you refer explicitly to the function in question
-    this.handleClick = this.handleClick.bind(this)
-}
 
-handleClick () {
-    this.setState({
-        location: 'Nairobi, Kenya'
-    })
+    handleClick () {
+        this.setState({
+            location: 'Nairobi, Kenya'
+        })
+    }
+    render() {
+        return (
+        <div>
+            <button 
+                onClick={this.handleClick}>
+                My Location
+            </button>
+            <h1>{this.state.location}</h1>
+        </div>
+        );
+    }
 }
 ```
 
 ---
+
+(11)
+
+React is a truly versatile application library. It keeps user interfaces as a core focus, and this is a key element of it's strength. Understanding how to being the journey using this library is of key importance, and has been covered above. Of close significance is knowing how to work with **state**, and an elementary introduction has been provided.
+
+For more in-depth studies, the official [React.js](https://reactjs.org/) website will be of great help. If after this, you would like to take a step further, [React Native](https://reactnative.dev/) is an awesome tool for creating cross-platform mobile applications. Good luck!
