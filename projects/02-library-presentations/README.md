@@ -131,6 +131,8 @@ This syntax above works for both stateless functional components and ES6 class-b
 
 State is an important concept in React applications. This is normally defined within the constructor in ES6 class-based components. The way to update state is via `this.setState()`. Here the keys are the properties of your assigned state and the values are state data to be updated. A change in state is typically triggered by a button (or internally an event change). Using a button that checks for a click event, this is as follows:
 
+---
+
 ```js
 class MyComponent extends React.Component {
     constructor(props) {
