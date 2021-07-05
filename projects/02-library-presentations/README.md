@@ -73,6 +73,8 @@ For this code to be displayed in the browser, a simple HTML implementation is ne
 
 According to [freeCodeCamp](https://www.freecodecamp.org/learn/front-end-libraries/#react), a _stateless functional component_ is any function you write which accepts props and returns JSX. A stateless component, however, is a class that extends `React.Component`, but does not use internal state. Finally, a stateful component is a class component that maintains its own internal state.
 
+---
+
 An example of a **stateless functional component** is seen below. Here, I intend to pass my component properties in the form of an array.
 
 ```js
