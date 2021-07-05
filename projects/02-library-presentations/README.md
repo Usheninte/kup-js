@@ -153,3 +153,25 @@ This syntax above works for both stateless functional components and ES6 class-b
 
 ---
 
+(10)
+
+State is an important concept in React applications. This is normally defined within the constructor in ES6 class-based components. The way to update state is via `this.setState()`. Here the keys are the properties of your assigned state and the values are state data to be updated. A change in state is typically triggered by a button (or internally an event change). Using a button that checks for a click event, this is as follows:
+
+```js
+constructor(props) {
+    super(props);
+    this.state = {
+    location: 'Lagos, Nigeria'
+    }
+    // bind lets you refer explicitly to the function in question
+    this.handleClick = this.handleClick.bind(this)
+}
+
+handleClick () {
+    this.setState({
+        location: 'Nairobi, Kenya'
+    })
+}
+```
+
+---
