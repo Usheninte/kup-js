@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>React.js Presentation</title>
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Ninte Dangana">
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				React is a declarative, component-based JavaScript library for building user interfaces. It makes
+				the promise of learning once and writing anywhere. It has proven its strengths in the software
+				industry over the past few years and is widely used.
+			</section>
+			<section>
+				React can be added to a website using a
+				<em>script</em> tag. It can also be used via <strong>Create React App</strong> if a more powerful
+				JavaScript toolchain is needed. The library can be rendered on the server using Node.js and can also be
+				used to build mobile apps via <strong>React Native</strong>.
+			</section>
+			<section>
+				<em>Declarative</em> means views for each state in an application can be designed with simplicity in
+				mind. React knows how best to update and render the relevant components when data changes occur. Views
+				written in the patterns are more predictable, easier to debug and simpler to understand.
+			</section>
+			<section>
+				<em>Component-based</em> means building wholesome views that manage their own state. These components
+				can then be further bundled to create complex user interfaces. As the logic for components are written
+				using JavaScript, this helps to pass data efficiently through and application; while keeping the
+				application state out of the <strong>Document Object Model</strong>.
+			</section>
+			<section>
+				The syntax for creating a class-based React component is as seen below. Equally important is knowing how
+				to render this to the DOM via React. This is shown too:
+				<img src="images/01.png" alt="01">
+			</section>
+			<section>
+				For this code to be displayed in the browser, a simple HTML implementation is needed:
+				<img src="images/02.png" alt="02">
+			</section>
+			<section>
+				According to <a href="https://www.freecodecamp.org/learn/front-end-libraries/#react">freeCodeCamp</a>, a
+				<em>stateless functional component</em> is any function you write which accepts props and returns JSX. A
+				stateless component, however, is a class that extends <em>React.Component</em>, but does not use
+				internal state. Finally, a stateful component is a class component that maintains its own internal
+				state.
+			</section>
+			<section>
+				An example of a <strong>stateless functional component</strong> is seen below. Here, I intend to pass my
+				component
+				properties in the form of an array.
+				<img src="images/03.png" alt="03">
+			</section>
+			<section>
+				Incorporated into the existing `React.js` file, this is as seen below. Child components can be composed
+				or nested within Parent components in React. This is the pattern used in the following snippet.
+				<img src="images/04.png" alt="04">
+			</section>
+			<section>
+				When working with React components, it is possible to set default properties as well as to indicate the
+				type of the property prior (including whether it is required or not).
+				<img src="images/05.png" alt="05">
+				<strong>propertyType</strong> should be implemented without the angle brackets, and should be
+				selected from ES6 in-built types.
+				<br /><br />
+				This syntax above works for both stateless functional components and ES6 class-based components.
+			</section>
+			<section>
+				State is an important concept in React applications. This is normally defined within the constructor in
+				ES6 class-based components. The way to update state is via <em>this.setState()</em>. Here the keys are
+				the properties of your assigned state and the values are state data to be updated. A change in state is
+				typically triggered by a button (or internally an event change). Using a button that checks for a click
+				event, this is as follows:
+			</section>
+			<section>
+				<img src="images/06.png" alt="06">
+			</section>
+			<section>
+				React is a truly versatile application library. It keeps user interfaces as a core focus, and this is a
+				key element of it's strength. Understanding how to being the journey using this library is of key
+				importance, and has been covered above. Of close significance is knowing how to work with
+				<strong>state</strong>, and
+				an elementary introduction has been provided.
+				<br /><br />
+				For more in-depth studies, the official <a href="https://reactjs.org/">React.js</a> website will be of
+				great help.
+				If after this, you would like to take a step further, <a href="https://reactnative.dev/">React
+					Native</a> is an
+				awesome tool for creating cross-platform mobile applications. Good luck!
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
