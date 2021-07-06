@@ -9,3 +9,7 @@ Inbound information will take the form of inventory names. Garden managers can a
 > User Objects
 
 ![User Objects](./UserObjects.png)
+
+> Stock Objects
+
+![Stock Objects](./StockObjects.png)
