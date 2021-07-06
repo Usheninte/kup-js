@@ -29,3 +29,9 @@ Inbound information will take the form of inventory names. Garden managers can a
 - Customers should be able to add/ remove stock items from cart
 - Customers should be able to pre-order items
 - Customers should be able to join waitlists for stock items
+
+#### Management
+
+- Staff should be able to add/ update stock item names and quantities
+- Staff should be able to check box indicating item sold out status
+- Staff should be able to place items in appropriate categories
