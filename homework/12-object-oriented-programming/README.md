@@ -13,3 +13,12 @@ Inbound information will take the form of inventory names. Garden managers can a
 > Stock Objects
 
 ![Stock Objects](./StockObjects.png)
+
+## User Stories
+
+#### Onboarding
+
+- User should be able to create an account and login
+- If user is customer, should be able to indicate stock items of interest
+- If staff, user should be able to select department and indicate whether part of management or not
+- If customer, user should be able to check join newsletter box
