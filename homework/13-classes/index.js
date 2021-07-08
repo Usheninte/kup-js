@@ -35,10 +35,7 @@ class Vehicle {
 class Cars extends Vehicle {
     constructor(needsMaintenance, tripsSinceMaintenance) {
         super(needsMaintenance, tripsSinceMaintenance);
-        if (!this.isDriving) {
-            this.tripsSinceMaintenance += 1;
-        }
-
+        this.isDriving = null;
         if (this.tripsSinceMaintenance > 100) {
             this.needsMaintenance = true;
         }
@@ -50,6 +47,7 @@ class Cars extends Vehicle {
 
     stop() {
         this.isDriving = false;
+        this.tripsSinceMaintenance += 1;
     }
 }
 
@@ -59,16 +57,30 @@ rangeRover.setMake('Range Rover');
 rangeRover.setModel('Land Rover');
 rangeRover.setYear('2020');
 rangeRover.setWeight('6,920 lbs.');
-console.log(rangeRover);
+// console.log(rangeRover);
 const mercedesBenz = new Cars();
 mercedesBenz.setMake('Mercedes-Benz');
 mercedesBenz.setModel('GLE 450 4MATIC SUV');
 mercedesBenz.setYear('2020');
 mercedesBenz.setWeight('6,614 lbs.');
-console.log(mercedesBenz);
+// console.log(mercedesBenz);
 const rav4toyota = new Cars();
 rav4toyota.setMake('Toyota');
 rav4toyota.setModel('RAV4');
 rav4toyota.setYear('2020');
 rav4toyota.setWeight('4,610 lbs.');
-console.log(rav4toyota);
+// console.log(rav4toyota);
+
+// drive cars
+
+// const driveCar = (carObj, numOfDrives) => {
+//     for (let i = 0; i < numOfDrives; i++) {
+//         carObj.drive();
+//         carObj.stop();
+//     }
+//     return {
+//         trips: carObj.tripsSinceMaintenance,
+//         needs: carObj.needsMaintenance
+//     };
+// }
+// console.log(driveCar(rav4toyota, 105));
