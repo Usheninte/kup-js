@@ -111,15 +111,16 @@ class Planes extends Vehicle {
         this.isFlying = true;
         if (this.needsMaintenance) {
             this.isFlying = false;
-            console.log('Plane cannot fly until repaired');
         }
     }
 
     land() {
         this.isFlying = false;
-        this.tripsSinceMaintenance += 1;
-        if (this.tripsSinceMaintenance > 100) {
+        if (this.tripsSinceMaintenance >= 100) {
             this.needsMaintenance = true;
+            console.log('Plane cannot fly until repaired');
+        } else {
+            this.tripsSinceMaintenance += 1;
         }
     }
 }
@@ -130,6 +131,26 @@ boeing.setModel('787');
 boeing.setYear('2009');
 boeing.setWeight('380,000 lbs.')
 
-console.log(boeing);
-
 // Fly planes
+
+const flyPlane = (planeObj, numOfFlights) => {
+    for (let i = 0; i < numOfFlights; i++) {
+        planeObj.fly();
+        planeObj.land();
+    }
+    const planeStatus = {
+        planeMake: planeObj.vehicleMake,
+        planeModel: planeObj.vehicleModel,
+        planeYear: planeObj.vehicleYear,
+        planeWeight: planeObj.vehicleWeight,
+        planeNeedsMaintenance: planeObj.needsMaintenance,
+        planeTripsSinceMaintenance: planeObj.tripsSinceMaintenance,
+    };
+    console.log(planeStatus);
+}
+
+flyPlane(boeing, 100);
+flyPlane(boeing, 1);
+flyPlane(boeing, 1);
+
+
