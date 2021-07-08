@@ -4,6 +4,10 @@ class Vehicle {
     constructor(needsMaintenance = false, tripsSinceMaintenance = 0) {
         this.needsMaintenance = needsMaintenance;
         this.tripsSinceMaintenance = tripsSinceMaintenance;
+        this.vehicleMake = '';
+        this.vehicleModel = '';
+        this.vehicleYear = '';
+        this.vehicleWeight = '';
     }
 
     setMake(vehicleMake) {
