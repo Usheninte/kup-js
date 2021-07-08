@@ -81,14 +81,16 @@ const driveCar = (carObj, numOfDrives) => {
         carObj.stop();
     }
     const carStatus = {
-        make: carObj.vehicleMake,
-        model: carObj.vehicleModel,
-        year: carObj.vehicleYear,
-        weight: carObj.vehicleWeight,
-        needsMaintenance: carObj.needsMaintenance,
-        tripsSinceMaintenance: carObj.tripsSinceMaintenance,
+        carMake: carObj.vehicleMake,
+        carModel: carObj.vehicleModel,
+        carYear: carObj.vehicleYear,
+        carWeight: carObj.vehicleWeight,
+        carNeedsMaintenance: carObj.needsMaintenance,
+        carTripsSinceMaintenance: carObj.tripsSinceMaintenance,
     };
     console.log(carStatus);
 }
 
+driveCar(rangeRover, 72);
+driveCar(mercedesBenz, 27);
 driveCar(rav4toyota, 103);
