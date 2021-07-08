@@ -52,26 +52,26 @@ class Cars extends Vehicle {
 }
 
 // Cars
+
 const rangeRover = new Cars();
 rangeRover.setMake('Range Rover');
 rangeRover.setModel('Land Rover');
 rangeRover.setYear('2020');
 rangeRover.setWeight('6,920 lbs.');
-// console.log(rangeRover);
+
 const mercedesBenz = new Cars();
 mercedesBenz.setMake('Mercedes-Benz');
 mercedesBenz.setModel('GLE 450 4MATIC SUV');
 mercedesBenz.setYear('2020');
 mercedesBenz.setWeight('6,614 lbs.');
-// console.log(mercedesBenz);
+
 const rav4toyota = new Cars();
 rav4toyota.setMake('Toyota');
 rav4toyota.setModel('RAV4');
 rav4toyota.setYear('2020');
 rav4toyota.setWeight('4,610 lbs.');
-// console.log(rav4toyota);
 
-// drive cars
+// Drive cars
 
 const driveCar = (carObj, numOfDrives) => {
     for (let i = 0; i < numOfDrives; i++) {
@@ -79,8 +79,9 @@ const driveCar = (carObj, numOfDrives) => {
         carObj.stop();
     }
     return {
-        trips: carObj.tripsSinceMaintenance,
-        needs: carObj.needsMaintenance
+        tripsSinceMaintenance: carObj.tripsSinceMaintenance,
+        needsMaintenance: carObj.needsMaintenance
     };
 }
-console.log(driveCar(rav4toyota, 100));
+
+console.log(driveCar(rav4toyota, 103));
