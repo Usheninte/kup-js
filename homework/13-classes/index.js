@@ -33,8 +33,10 @@ class Vehicle {
 }
 
 class Cars extends Vehicle {
-    constructor(needsMaintenance, tripsSinceMaintenance) {
-        super(needsMaintenance, tripsSinceMaintenance);
+    constructor(needsMaintenance, tripsSinceMaintenance, vehicleMake,
+        vehicleModel, vehicleYear, vehicleWeight) {
+        super(needsMaintenance, tripsSinceMaintenance,
+            vehicleMake, vehicleModel, vehicleWeight, vehicleYear);
         this.isDriving = null;
     }
 
@@ -78,10 +80,15 @@ const driveCar = (carObj, numOfDrives) => {
         carObj.drive();
         carObj.stop();
     }
-    return {
+    const carStatus = {
+        make: carObj.vehicleMake,
+        model: carObj.vehicleModel,
+        year: carObj.vehicleYear,
+        weight: carObj.vehicleWeight,
+        needsMaintenance: carObj.needsMaintenance,
         tripsSinceMaintenance: carObj.tripsSinceMaintenance,
-        needsMaintenance: carObj.needsMaintenance
     };
+    console.log(carStatus);
 }
 
-console.log(driveCar(rav4toyota, 103));
+driveCar(rav4toyota, 103);
