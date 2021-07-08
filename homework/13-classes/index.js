@@ -36,9 +36,6 @@ class Cars extends Vehicle {
     constructor(needsMaintenance, tripsSinceMaintenance) {
         super(needsMaintenance, tripsSinceMaintenance);
         this.isDriving = null;
-        if (this.tripsSinceMaintenance > 100) {
-            this.needsMaintenance = true;
-        }
     }
 
     drive() {
@@ -48,6 +45,9 @@ class Cars extends Vehicle {
     stop() {
         this.isDriving = false;
         this.tripsSinceMaintenance += 1;
+        if (this.tripsSinceMaintenance > 100) {
+            this.needsMaintenance = true;
+        }
     }
 }
 
@@ -73,14 +73,14 @@ rav4toyota.setWeight('4,610 lbs.');
 
 // drive cars
 
-// const driveCar = (carObj, numOfDrives) => {
-//     for (let i = 0; i < numOfDrives; i++) {
-//         carObj.drive();
-//         carObj.stop();
-//     }
-//     return {
-//         trips: carObj.tripsSinceMaintenance,
-//         needs: carObj.needsMaintenance
-//     };
-// }
-// console.log(driveCar(rav4toyota, 105));
+const driveCar = (carObj, numOfDrives) => {
+    for (let i = 0; i < numOfDrives; i++) {
+        carObj.drive();
+        carObj.stop();
+    }
+    return {
+        trips: carObj.tripsSinceMaintenance,
+        needs: carObj.needsMaintenance
+    };
+}
+console.log(driveCar(rav4toyota, 100));
