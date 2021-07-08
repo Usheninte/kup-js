@@ -91,11 +91,11 @@ const driveCar = (carObj, numOfDrives) => {
     console.log(carStatus);
 }
 
-// driveCar(rangeRover, 72);
-// driveCar(mercedesBenz, 27);
-// driveCar(rav4toyota, 103);
-// rav4toyota.repair(); // perform maintenance repairs
-// driveCar(rav4toyota, 58);
+driveCar(rangeRover, 72);
+driveCar(mercedesBenz, 27);
+driveCar(rav4toyota, 103);
+rav4toyota.repair(); // perform maintenance repairs
+driveCar(rav4toyota, 58);
 
 // Planes
 
@@ -152,5 +152,6 @@ const flyPlane = (planeObj, numOfFlights) => {
 flyPlane(boeing, 100);
 flyPlane(boeing, 1);
 flyPlane(boeing, 1);
-
+boeing.repair(); // perform maintenance repairs
+flyPlane(boeing, 40);
 
