@@ -1,4 +1,4 @@
-// Classes
+// Vehicles
 
 class Vehicle {
     constructor(needsMaintenance = false, tripsSinceMaintenance = 0) {
@@ -32,6 +32,8 @@ class Vehicle {
     }
 }
 
+// Cars
+
 class Cars extends Vehicle {
     constructor(needsMaintenance, tripsSinceMaintenance, vehicleMake,
         vehicleModel, vehicleYear, vehicleWeight) {
@@ -52,8 +54,6 @@ class Cars extends Vehicle {
         }
     }
 }
-
-// Cars
 
 const rangeRover = new Cars();
 rangeRover.setMake('Range Rover');
@@ -94,3 +94,5 @@ const driveCar = (carObj, numOfDrives) => {
 driveCar(rangeRover, 72);
 driveCar(mercedesBenz, 27);
 driveCar(rav4toyota, 103);
+rav4toyota.repair(); // perform maintenance repairs
+driveCar(rav4toyota, 58);
