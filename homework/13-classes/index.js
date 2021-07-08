@@ -91,8 +91,45 @@ const driveCar = (carObj, numOfDrives) => {
     console.log(carStatus);
 }
 
-driveCar(rangeRover, 72);
-driveCar(mercedesBenz, 27);
-driveCar(rav4toyota, 103);
-rav4toyota.repair(); // perform maintenance repairs
-driveCar(rav4toyota, 58);
+// driveCar(rangeRover, 72);
+// driveCar(mercedesBenz, 27);
+// driveCar(rav4toyota, 103);
+// rav4toyota.repair(); // perform maintenance repairs
+// driveCar(rav4toyota, 58);
+
+// Planes
+
+class Planes extends Vehicle {
+    constructor(needsMaintenance, tripsSinceMaintenance, vehicleMake,
+        vehicleModel, vehicleYear, vehicleWeight) {
+        super(needsMaintenance, tripsSinceMaintenance,
+            vehicleMake, vehicleModel, vehicleWeight, vehicleYear);
+        this.isFlying = null;
+    }
+
+    fly() {
+        this.isFlying = true;
+        if (this.needsMaintenance) {
+            this.isFlying = false;
+            console.log('Plane cannot fly until repaired');
+        }
+    }
+
+    land() {
+        this.isFlying = false;
+        this.tripsSinceMaintenance += 1;
+        if (this.tripsSinceMaintenance > 100) {
+            this.needsMaintenance = true;
+        }
+    }
+}
+
+const boeing = new Planes();
+boeing.setMake('Boeing');
+boeing.setModel('787');
+boeing.setYear('2009');
+boeing.setWeight('380,000 lbs.')
+
+console.log(boeing);
+
+// Fly planes
