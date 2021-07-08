@@ -21,6 +21,11 @@ class Vehicle {
     setWeight(vehicleWeight) {
         this.vehicleWeight = vehicleWeight;
     }
+
+    repair() {
+        this.tripsSinceMaintenance = 0;
+        this.needsMaintenance = false;
+    }
 }
 
 class Cars extends Vehicle {
