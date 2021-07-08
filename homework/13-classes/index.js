@@ -52,3 +52,23 @@ class Cars extends Vehicle {
         this.isDriving = false;
     }
 }
+
+// Cars
+const rangeRover = new Cars();
+rangeRover.setMake('Range Rover');
+rangeRover.setModel('Land Rover');
+rangeRover.setYear('2020');
+rangeRover.setWeight('6920 lbs.');
+console.log(rangeRover);
+// const mercedesBenz = new Cars();
+// mercedesBenz.setMake();
+// mercedesBenz.setModel();
+// mercedesBenz.setYear();
+// mercedesBenz.setWeight();
+// console.log(mercedesBenz);
+// const rav4toyota = new Cars();
+// rav4toyota.setMake();
+// rav4toyota.setModel();
+// rav4toyota.setYear();
+// rav4toyota.setWeight();
+// console.log(rav4toyota);
