@@ -22,3 +22,24 @@ class Vehicle {
         this.vehicleWeight = vehicleWeight;
     }
 }
+
+class Cars extends Vehicle {
+    constructor(needsMaintenance, tripsSinceMaintenance) {
+        super(needsMaintenance, tripsSinceMaintenance);
+        if (!this.isDriving) {
+            this.tripsSinceMaintenance += 1;
+        }
+
+        if (this.tripsSinceMaintenance > 100) {
+            this.needsMaintenance = true;
+        }
+    }
+
+    drive() {
+        this.isDriving = true;
+    }
+
+    stop() {
+        this.isDriving = false;
+    }
+}
