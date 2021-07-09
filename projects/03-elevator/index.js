@@ -16,11 +16,17 @@ class Elevator {
     }
 
     ride(current, destination) {
-        let transitFloor = current;
-        if (current < destination) {
-            Elevator.move(transitFloor, destination);
+        if (destination > this.highestFloor) {
+            console.log('Elevator can not go that high');
+        } else if (current < this.lowestFloor) {
+            console.log('Elevator can not move from this location');
         } else {
-            Elevator.move(transitFloor, destination);
+            let transitFloor = current;
+            if (current < destination) {
+                Elevator.move(transitFloor, destination);
+            } else {
+                Elevator.move(transitFloor, destination);
+            }
         }
     }
 
@@ -42,9 +48,9 @@ class Elevator {
 const elevatorA = new Elevator('Elevator A', -1, 9);
 const elevatorB = new Elevator('Elevator B', 0, 10);
 
-elevatorA.setCurrentFloor(6);
-elevatorA.setDestinationFloor(2);
-elevatorA.ride(elevatorA.currentFloor, elevatorA.destinationFloor);
+elevatorB.setCurrentFloor(0);
+elevatorB.setDestinationFloor(13);
+elevatorB.ride(elevatorB.currentFloor, elevatorB.destinationFloor);
 
 // console.log(elevatorA);
 // console.log(elevatorB);
