@@ -31,8 +31,7 @@ class Elevator {
     }
 
     static move(carriage, transit, final) {
-        console.log(`${carriage}: Open doors`);
-        console.log(`${carriage}: Close doors`);
+        Elevator.doors(carriage);
 
         while (transit < final) {
             console.log(`Elevator now at ${transit}`);
@@ -47,9 +46,13 @@ class Elevator {
         if (transit === final) {
             console.log(`Destination reached: ${transit}`);
 
-            console.log(`${carriage}: Open doors`);
-            console.log(`${carriage}: Close doors`);
+            Elevator.doors(carriage);
         }
+    }
+
+    static doors(elevatorCar) {
+        console.log(`${elevatorCar}: Open doors`);
+        console.log(`${elevatorCar}: Close doors`);
     }
 }
 
