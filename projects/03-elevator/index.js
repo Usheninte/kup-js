@@ -18,21 +18,23 @@ class Elevator {
     ride(current, destination) {
         let transitFloor = current;
         if (current < destination) {
-            while (transitFloor < destination) {
-                console.log(`Elevator now at ${transitFloor}`);
-                transitFloor++;
-            }
-            if (transitFloor === destination) {
-                console.log(`Destination reached: ${transitFloor}`);
-            }
+            Elevator.move(transitFloor, destination);
         } else {
-            while (transitFloor > destination) {
-                console.log(`Elevator now at ${transitFloor}`);
-                transitFloor--;
-            }
-            if (transitFloor === destination) {
-                console.log(`Destination reached: ${transitFloor}`);
-            }
+            Elevator.move(transitFloor, destination);
+        }
+    }
+
+    static move(transit, final) {
+        while (transit < final) {
+            console.log(`Elevator now at ${transit}`);
+            transit++;
+        }
+        while (transit > final) {
+            console.log(`Elevator now at ${transit}`);
+            transit--;
+        }
+        if (transit === final) {
+            console.log(`Destination reached: ${transit}`);
         }
     }
 }
@@ -40,8 +42,8 @@ class Elevator {
 const elevatorA = new Elevator('Elevator A', -1, 9);
 const elevatorB = new Elevator('Elevator B', 0, 10);
 
-elevatorA.setCurrentFloor(2);
-elevatorA.setDestinationFloor(6);
+elevatorA.setCurrentFloor(6);
+elevatorA.setDestinationFloor(2);
 elevatorA.ride(elevatorA.currentFloor, elevatorA.destinationFloor);
 
 // console.log(elevatorA);
