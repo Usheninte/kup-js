@@ -15,7 +15,7 @@ class Elevator {
         this.destinationFloor = destination;
     }
 
-    ride(carriageName, current, destination) {
+    ride(carriageName, current, destination, emergency) {
         if (destination > this.highestFloor) {
             console.log('Elevator can not go that high');
         } else if (current < this.lowestFloor) {
@@ -27,6 +27,18 @@ class Elevator {
             } else {
                 Elevator.move(carriageName, transitFloor, destination);
             }
+        }
+    }
+
+    static emergencyButton(carriage, lastFloor, final) {
+        while (lastFloor < final) {
+            lastFloor++;
+            return `${carriage}: Open doors`;
+        }
+
+        while (lastFloor > final) {
+            lastFloor--;
+            return `${carriage}: Open doors`;
         }
     }
 
@@ -61,7 +73,8 @@ const elevatorB = new Elevator('Elevator B', 0, 10);
 
 elevatorA.setCurrentFloor(2);
 elevatorA.setDestinationFloor(7);
-elevatorA.ride(elevatorA.name, elevatorA.currentFloor, elevatorA.destinationFloor);
+// elevatorA.ride(elevatorA.name, elevatorA.currentFloor, elevatorA.destinationFloor);
+elevatorA.ride(elevatorA.name, elevatorA.currentFloor, elevatorA.destinationFloor, true);
 
 // elevatorB.setCurrentFloor(2);
 // elevatorB.setDestinationFloor(7);
