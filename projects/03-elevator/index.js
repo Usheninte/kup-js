@@ -15,7 +15,7 @@ class Elevator {
         this.destinationFloor = destination;
     }
 
-    ride(current, destination) {
+    ride(carriageName, current, destination) {
         if (destination > this.highestFloor) {
             console.log('Elevator can not go that high');
         } else if (current < this.lowestFloor) {
@@ -23,24 +23,32 @@ class Elevator {
         } else {
             let transitFloor = current;
             if (current < destination) {
-                Elevator.move(transitFloor, destination);
+                Elevator.move(carriageName, transitFloor, destination);
             } else {
-                Elevator.move(transitFloor, destination);
+                Elevator.move(carriageName, transitFloor, destination);
             }
         }
     }
 
-    static move(transit, final) {
+    static move(carriage, transit, final) {
+        console.log(`${carriage}: Open doors`);
+        console.log(`${carriage}: Close doors`);
+
         while (transit < final) {
             console.log(`Elevator now at ${transit}`);
             transit++;
         }
+
         while (transit > final) {
             console.log(`Elevator now at ${transit}`);
             transit--;
         }
+
         if (transit === final) {
             console.log(`Destination reached: ${transit}`);
+
+            console.log(`${carriage}: Open doors`);
+            console.log(`${carriage}: Close doors`);
         }
     }
 }
@@ -48,9 +56,13 @@ class Elevator {
 const elevatorA = new Elevator('Elevator A', -1, 9);
 const elevatorB = new Elevator('Elevator B', 0, 10);
 
-elevatorB.setCurrentFloor(0);
-elevatorB.setDestinationFloor(13);
-elevatorB.ride(elevatorB.currentFloor, elevatorB.destinationFloor);
+elevatorA.setCurrentFloor(2);
+elevatorA.setDestinationFloor(7);
+elevatorA.ride(elevatorA.name, elevatorA.currentFloor, elevatorA.destinationFloor);
+
+// elevatorB.setCurrentFloor(2);
+// elevatorB.setDestinationFloor(7);
+// elevatorB.ride(elevatorB.name, elevatorB.currentFloor, elevatorB.destinationFloor);
 
 // console.log(elevatorA);
 // console.log(elevatorB);
